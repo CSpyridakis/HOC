@@ -1,7 +1,7 @@
 #ifndef PARALLEL_SERIALHAMMING_H
 #define PARALLEL_SERIALHAMMING_H
 
-#include "costum_structs.h"
+#include "mystructs.h"
 
 /**
  * @brief Calculate Hamming Values of Arrays src->A and src->B in NON-optimized (Serial) way

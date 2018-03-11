@@ -1,7 +1,7 @@
 #ifndef PARALLEL_PTHREADSHAMMING_H
 #define PARALLEL_PTHREADSHAMMING_H
 
-#include "costum_structs.h"
+#include "mystructs.h"
 
 /**
  * @brief Calculate Hamming Distance using OpenMP//TODO

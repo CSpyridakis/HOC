@@ -2,7 +2,7 @@
 #include <pthread.h>
 #include <time.h>
 #include "pthreadsHamming.h"
-#include "costum_structs.h"
+#include "mystructs.h"
 
 double pthreadsHamm_taskA(structs *src, int **serialhammingValue) {
     clock_t begin = clock();

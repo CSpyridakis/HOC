@@ -2,7 +2,7 @@
 #include <omp.h>
 #include <time.h>
 #include "openMpHamming.h"
-#include "costum_structs.h"
+#include "mystructs.h"
 
 double openMpHamm_taskA(structs *src, int **serialhammingValue) {
 

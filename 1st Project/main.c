@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "costum_structs.h"
+#include "mystructs.h"
 #include "serialHamming.h"
 #include "openMpHamming.h"
 #include "pthreadsHamming.h"

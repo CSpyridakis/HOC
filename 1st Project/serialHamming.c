@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "serialHamming.h"
-#include "costum_structs.h"
+#include "mystructs.h"
 
 int **initSerial(int a, int b) {
     int i, j;

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-#include "costum_structs.h"
+#include "mystructs.h"
 
 void structsGenerate(structs *src, int alen, int blen, int strlen) {
 

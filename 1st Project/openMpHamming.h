@@ -1,7 +1,7 @@
 #ifndef PARALLEL_OPENMPHAMMING_H
 #define PARALLEL_OPENMPHAMMING_H
 
-#include "costum_structs.h"
+#include "mystructs.h"
 
 /**
  * @brief Calculate Hamming Distance using OpenMP//TODO
