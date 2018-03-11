@@ -77,4 +77,8 @@ void displayHammingValues(int alen, int blen, int **serV);
 
 bool validateHamm();
 
+int calcSumOfArray(int alen,int blen,int **hamV);
+
+int **init2dArray(int a, int b);
+
 #endif //PARALLEL_COSTUM_STRUCTS_H

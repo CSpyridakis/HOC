@@ -20,24 +20,24 @@ int main() {
                 // Random Generate new Structs
                 structsGenerate(newStruct, aLength[i], bLength[j], stringLength[k]);
                 /// Save Hamming values of serial calculation
-                int **serialhammingValues;
+                int serialsum;
 
                 // Print loop information
-                printf("\n\nCalculating Hamming distances for m:%d n:%d l:%d\n", newStruct->Alen, newStruct->Blen,
+                printf("\nCalculating Hamming distances for m:%d n:%d l:%d\n", newStruct->Alen, newStruct->Blen,
                        newStruct->Strlen);
 
                 /// Serial Hamming Calculation
-                hammT[i][j][k].serial = serialHamm(newStruct, serialhammingValues);
+                hammT[i][j][k].serial = serialHamm(newStruct, &serialsum);
 
                 /// OpenMp Hamming Calculation
-                hammT[i][j][k].openMp[TASK_A] = openMpHamm_taskA(newStruct, serialhammingValues);
-                hammT[i][j][k].openMp[TASK_B] = openMpHamm_taskB(newStruct, serialhammingValues);
-                hammT[i][j][k].openMp[TASK_C] = openMpHamm_taskC(newStruct, serialhammingValues);
+                hammT[i][j][k].openMp[TASK_A] = openMpHamm_taskA(newStruct, serialsum);
+                hammT[i][j][k].openMp[TASK_B] = openMpHamm_taskB(newStruct, serialsum);
+                hammT[i][j][k].openMp[TASK_C] = openMpHamm_taskC(newStruct, serialsum);
 
                 /// Pthreads Hamming Calculation
-                hammT[i][j][k].pthreads[TASK_A] = pthreadsHamm_taskA(newStruct, serialhammingValues);
-                hammT[i][j][k].pthreads[TASK_B] = pthreadsHamm_taskB(newStruct, serialhammingValues);
-                hammT[i][j][k].pthreads[TASK_C] = pthreadsHamm_taskC(newStruct, serialhammingValues);
+                hammT[i][j][k].pthreads[TASK_A] = pthreadsHamm_taskA(newStruct, serialsum);
+                hammT[i][j][k].pthreads[TASK_B] = pthreadsHamm_taskB(newStruct, serialsum);
+                hammT[i][j][k].pthreads[TASK_C] = pthreadsHamm_taskC(newStruct, serialsum);
 
 //                deallser(serialhammingValues,newStruct->Alen);
                 deallsrc(newStruct);

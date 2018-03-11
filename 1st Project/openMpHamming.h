@@ -7,30 +7,30 @@
  * @brief Calculate Hamming Distance using OpenMP//TODO
  *
  * @param src                   Struct where all needed info is located
- * @param serialhammingValue    Hamming Distances (Used for validate purpose)
+ * @param serialHammingSum      Hamming Distances (Used for validate purpose)
  *
  * @return (double) calculation time. In case hamming distance is wrong return -1
  */
-double openMpHamm_taskA(structs *src, int **serialhammingValue);
+double openMpHamm_taskA(structs *src, int serialHammingSum);
 
 /**
  * @brief Calculate Hamming Distance using OpenMP//TODO
  *
  * @param src                   Struct where all needed info is located
- * @param serialhammingValue    Hamming Distances (Used for validate purpose)
+ * @param serialHammingSum      Hamming Distances (Used for validate purpose)
  *
  * @return (double) calculation time. In case hamming distance is wrong return -1
  */
-double openMpHamm_taskB(structs *src, int **serialhammingValue);
+double openMpHamm_taskB(structs *src, int serialHammingSum);
 
 /**
  * @brief Calculate Hamming Distance using OpenMP//TODO
  *
  * @param src                   Struct where all needed info is located
- * @param serialhammingValue    Hamming Distances (Used for validate purpose)
+ * @param serialHammingSum      Hamming Distances (Used for validate purpose)
  *
  * @return (double) calculation time. In case hamming distance is wrong return -1
  */
-double openMpHamm_taskC(structs *src, int **serialhammingValue);
+double openMpHamm_taskC(structs *src, int serialHammingSum);
 
 #endif //PARALLEL_OPENMPHAMMING_H

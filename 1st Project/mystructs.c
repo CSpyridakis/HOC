@@ -73,3 +73,34 @@ void deallser(int **serV, int a) {
     }
     free(serV);
 }
+
+int calcSumOfArray(int alen,int blen,int **hamV){
+    int i,j,sum=0;
+    for (i = 0; i < alen; i++) {
+        for (j = 0; j < blen; j++) {
+            sum+=hamV[i][j];
+        }
+    }
+    return sum;
+}
+
+/// Create and initialize 2d array
+int **init2dArray(int a, int b) {
+
+    int i, j;
+    int **serV;
+
+    /// Allocate memory for array
+    serV = (int **) malloc(sizeof(int *) * a);
+    for (i = 0; i < a; i++) {
+        serV[i] = (int *) malloc(sizeof(int) * b);
+    }
+
+    /// Initialize Array
+    for (i = 0; i < a; i++) {
+        for (j = 0; j < b; j++) {
+            serV[i][j] = 0;
+        }
+    }
+    return serV;
+}
