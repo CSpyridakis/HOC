@@ -6,8 +6,6 @@
 void structsGenerate(structs *src, int alen, int blen, int strlen) {
 
     int i, j;
-    int row = alen;
-    int col = strlen;
 
     /// Copy main Values
     src->Alen = alen;
@@ -19,12 +17,17 @@ void structsGenerate(structs *src, int alen, int blen, int strlen) {
 
     /// Create two two dimension RANDOM char arrays
     src->A = (char **) malloc(sizeof(char *) * src->Alen);
-    src->B = (char **) malloc(sizeof(char *) * src->Blen);
-    for (i = 0; i < row; i++) {
+    for (i = 0; i < src->Alen; i++) {
         src->A[i] = (char *) malloc(sizeof(char) * src->Strlen);
-        src->B[i] = (char *) malloc(sizeof(char) * src->Strlen);
-        for (j = 0; j < col; j++) {
+        for (j = 0; j < src->Strlen; j++) {
             src->A[i][j] = (rand() % 2) + '0';
+        }
+    }
+
+    src->B = (char **) malloc(sizeof(char *) * src->Blen);
+    for (i = 0; i < src->Blen; i++) {
+        src->B[i] = (char *) malloc(sizeof(char) * src->Strlen);
+        for (j = 0; j < src->Strlen; j++) {
             src->B[i][j] = (rand() % 2) + '0';
         }
     }
@@ -34,6 +37,8 @@ void deallsrc(structs *src) {
     int i;
     for (i = 0; i < src->Alen; i++) {
         free(src->A[i]);
+    }
+    for (i = 0; i < src->Blen; i++) {
         free(src->B[i]);
     }
     free(src->A);
@@ -41,7 +46,7 @@ void deallsrc(structs *src) {
     free(src);
 }
 
-void printResults(int srcL, int strL, hammingTimes *hammT) {
+void printResults(int srcA, int srcB, int strL, hammingTimes *hammT) {
     //TODO MAIN LOGIC
 }
 

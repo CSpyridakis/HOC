@@ -5,6 +5,7 @@
 #include "mystructs.h"
 
 int **initSerial(int a, int b) {
+
     int i, j;
 
     int **serV;
@@ -26,10 +27,9 @@ int **initSerial(int a, int b) {
 double serialHamm(structs *src, int **serialhammingValue) {
 
     serialhammingValue = initSerial(src->Alen, src->Blen);
-
+    printf("Serial...");
     clock_t begin = clock();
     int i, j, k;
-
     for (i = 0; i < src->Alen; i++) {
         for (j = 0; j < src->Blen; j++) {
             for (k = 0; k < src->Strlen; k++) {
@@ -39,12 +39,12 @@ double serialHamm(structs *src, int **serialhammingValue) {
             }
         }
     }
-
     clock_t end = clock();
 
     // Display Serial Hamming values
 //    displayHammingValues(src->Alen, src->Blen, serialhammingValue);
 
+    printf("finished\t\t Time of execution:%f sec\n",(double) (end - begin) / CLOCKS_PER_SEC);
     return (double) (end - begin) / CLOCKS_PER_SEC;
 }
 
