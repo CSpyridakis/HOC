@@ -55,8 +55,6 @@ int **init2dArray(int a, int b);
  */
 void structsGenerate(structs *src, int alen, int blen, int strlen);
 
-int calcSumOfArray(int alen,int blen,int **hamV);
-
 /**
  * @brief De-allocate memory of custom Struct that contains data
  *
@@ -73,6 +71,6 @@ void deallsrc(structs *src);
  */
 void displayHammingValues(int alen, int blen, int **serV);
 
-void printResults(int srcA, int srcB, int strL, hammingTimes *hammT);
+void printResults(hammingTimes *hammT);
 
 #endif //PARALLEL_COSTUM_STRUCTS_H

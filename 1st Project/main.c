@@ -39,13 +39,14 @@ int main() {
                 hammT[i][j][k].pthreads[TASK_B] = pthreadsHamm_taskB(newStruct, serialsum);
                 hammT[i][j][k].pthreads[TASK_C] = pthreadsHamm_taskC(newStruct, serialsum);
 
+                // De-allocate memory
                 deallsrc(newStruct);
             }
         }
     }
 
     //Display Results for each case
-    printResults(ARRAY_A, ARRAY_B, STRINGS_L, (hammingTimes *) hammT);
+    //printResults((hammingTimes *) hammT);
 
     return 0;
 }

@@ -52,16 +52,6 @@ void structsGenerate(structs *src, int alen, int blen, int strlen) {
     }
 }
 
-int calcSumOfArray(int alen,int blen,int **hamV){
-    int i,j,sum=0;
-    for (i = 0; i < alen; i++) {
-        for (j = 0; j < blen; j++) {
-            sum+=hamV[i][j];
-        }
-    }
-    return sum;
-}
-
 void deallsrc(structs *src) {
     int i;
     for (i = 0; i < src->Alen; i++) {
@@ -75,7 +65,7 @@ void deallsrc(structs *src) {
     free(src);
 }
 
-void printResults(int srcA, int srcB, int strL, hammingTimes *hammT) {
+void printResults(hammingTimes *hammT) {
     //TODO MAIN LOGIC
 }
 
