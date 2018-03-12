@@ -19,7 +19,7 @@ int main() {
                 structs *newStruct = (structs *) malloc(sizeof(structs));
                 // Random Generate new Structs
                 structsGenerate(newStruct, aLength[i], bLength[j], stringLength[k]);
-                /// Save Hamming values of serial calculation
+                /// Save Hamming sum of serial calculation
                 int serialsum;
 
                 // Print loop information
@@ -39,7 +39,6 @@ int main() {
                 hammT[i][j][k].pthreads[TASK_B] = pthreadsHamm_taskB(newStruct, serialsum);
                 hammT[i][j][k].pthreads[TASK_C] = pthreadsHamm_taskC(newStruct, serialsum);
 
-//                deallser(serialhammingValues,newStruct->Alen);
                 deallsrc(newStruct);
             }
         }

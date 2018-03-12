@@ -3,8 +3,28 @@
 #include <stdlib.h>
 #include "mystructs.h"
 
-void structsGenerate(structs *src, int alen, int blen, int strlen) {
+/// Create and initialize 2d array
+int **init2dArray(int a, int b) {
 
+    int i, j;
+    int **serV;
+
+    /// Allocate memory for array
+    serV = (int **) malloc(sizeof(int *) * a);
+    for (i = 0; i < a; i++) {
+        serV[i] = (int *) malloc(sizeof(int) * b);
+    }
+
+    /// Initialize Array
+    for (i = 0; i < a; i++) {
+        for (j = 0; j < b; j++) {
+            serV[i][j] = 0;
+        }
+    }
+    return serV;
+}
+
+void structsGenerate(structs *src, int alen, int blen, int strlen) {
     int i, j;
 
     /// Copy main Values
@@ -23,7 +43,6 @@ void structsGenerate(structs *src, int alen, int blen, int strlen) {
             src->A[i][j] = (rand() % 2) + '0';
         }
     }
-
     src->B = (char **) malloc(sizeof(char *) * src->Blen);
     for (i = 0; i < src->Blen; i++) {
         src->B[i] = (char *) malloc(sizeof(char) * src->Strlen);
@@ -31,6 +50,16 @@ void structsGenerate(structs *src, int alen, int blen, int strlen) {
             src->B[i][j] = (rand() % 2) + '0';
         }
     }
+}
+
+int calcSumOfArray(int alen,int blen,int **hamV){
+    int i,j,sum=0;
+    for (i = 0; i < alen; i++) {
+        for (j = 0; j < blen; j++) {
+            sum+=hamV[i][j];
+        }
+    }
+    return sum;
 }
 
 void deallsrc(structs *src) {
@@ -58,49 +87,4 @@ void displayHammingValues(int alen, int blen, int **serV) {
         }
         printf("|\n");
     }
-
-}
-
-bool validateHamm() {
-    //TODO MAIN LOGIC
-    return true;
-}
-
-void deallser(int **serV, int a) {
-    int i;
-    for (i = 0; i < a; i++) {
-        free(serV[i]);
-    }
-    free(serV);
-}
-
-int calcSumOfArray(int alen,int blen,int **hamV){
-    int i,j,sum=0;
-    for (i = 0; i < alen; i++) {
-        for (j = 0; j < blen; j++) {
-            sum+=hamV[i][j];
-        }
-    }
-    return sum;
-}
-
-/// Create and initialize 2d array
-int **init2dArray(int a, int b) {
-
-    int i, j;
-    int **serV;
-
-    /// Allocate memory for array
-    serV = (int **) malloc(sizeof(int *) * a);
-    for (i = 0; i < a; i++) {
-        serV[i] = (int *) malloc(sizeof(int) * b);
-    }
-
-    /// Initialize Array
-    for (i = 0; i < a; i++) {
-        for (j = 0; j < b; j++) {
-            serV[i][j] = 0;
-        }
-    }
-    return serV;
 }

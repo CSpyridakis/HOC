@@ -6,7 +6,7 @@
 
 double serialHamm(structs *src, int *serialSum) {
 
-    int **serialhammingValues = init2dArray(src->Alen, src->Blen);
+    int **serialhammingValues = init2dArray(src->Alen, src->Blen);//TODO DE-ALLOCATE MEMORY
     printf("Serial...");
 
     /// Calculate Hamming Distance in NON-optimized (Serial) way
@@ -31,10 +31,11 @@ double serialHamm(structs *src, int *serialSum) {
     double sumTime=(double) (end - begin) / CLOCKS_PER_SEC;
 
     // Display Serial Hamming values
-//    displayHammingValues(src->Alen, src->Blen, serialhammingValue);
+//    displayHammingValues(src->Alen, src->Blen, serialhammingValues);
 
-    printf("finished\t\t Hamming Time:%f sec | Sum Value:%d | Sum Calculation:%f | Total time:%f\n",calcTime,(*serialSum),sumTime,(calcTime+sumTime));
-    return calcTime+sumTime;
+    printf(ANSI_GREEN"finished"ANSI_RESET"\t\t ");
+    printf("Hamming time:%f sec | Sum time:%f | Total time:%f | Sum Value:%d\n",calcTime,sumTime,(calcTime+sumTime),(*serialSum));
+    return calcTime;
 }
 
 
