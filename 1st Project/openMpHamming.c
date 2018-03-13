@@ -13,8 +13,17 @@ double openMpHamm_taskA(structs *src, int serialHammingSum) {
     printf("OpenMP task A.....");
     clock_t begin = clock();
 
-    //TODO MAIN LOGIC
-    //TODO sum++
+    //Parrallel threads
+    //TODO create n threads where each uses part of string
+    int i,j;
+    for (i=0;i<src->Alen;i++){
+        for(j=0;j<src->Blen;j++){
+           // if(src->A[i][]==src->B[j][]){
+                //TODO increase value in hamming table
+                //TODO increase sum hamming table
+          //  }
+        }
+    }
 
     clock_t end = clock();
     double calcTime=(double) (end - begin) / CLOCKS_PER_SEC;
