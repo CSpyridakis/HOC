@@ -77,4 +77,14 @@ void displayHammingValues(int alen, int blen, int **serV);
 
 void printResults(hammingTimes *hammT);
 
+/**
+ * @brief ONLY FOR DEBUGGING DATA RACES
+ * @param alen
+ * @param blen
+ * @param hamV
+ * @return
+ */
+int calcSumOfArray(int alen, int blen, int **hamV);
+
+
 #endif //PARALLEL_COSTUM_STRUCTS_H

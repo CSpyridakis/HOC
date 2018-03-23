@@ -87,3 +87,13 @@ void displayHammingValues(int alen, int blen, int **serV) {
         printf("|\n");
     }
 }
+
+int calcSumOfArray(int alen, int blen, int **hamV) {
+    int i, j, sum = 0;
+    for (i = 0; i < alen; i++) {
+        for (j = 0; j < blen; j++) {
+            sum += hamV[i][j];
+        }
+    }
+    return sum;
+}

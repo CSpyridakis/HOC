@@ -6,29 +6,27 @@
 double openMpHamm_taskA(structs *src, int serialHammingSum) {
 
     int sum = 0;
-
-    int **hammingValues = init2dArray(src->Alen, src->Blen);//TODO DE-ALLOCATE MEMORY
+    int **hammingValues = init2dArray(src->Alen, src->Blen);
 
     printf("OpenMP task A.....");
     double begin = gettime();
     #pragma omp parallel
     {
-        int i, j, k, su = 0;
+        int i, j, k, psum = 0;
         for (i = 0; i < src->Alen; i++) {
             for (j = 0; j < src->Blen; j++) {
                 #pragma omp for
                 for (k = 0; k < src->Strlen; k++) {
                     if (src->A[i][k] != src->B[j][k]) {
-                        su++;
+                        //hammingValues[i][j]++;
+                        psum++;
                     }
                 }
             }
         }
 
-        #pragma omp critical
-        {
-            sum += su;
-        }
+        #pragma omp atomic
+        sum += psum;
     }
     double end = gettime();
     double calcTime = end - begin;
@@ -39,23 +37,41 @@ double openMpHamm_taskA(structs *src, int serialHammingSum) {
         return (double) (-1);
     }
 
+
+    //Print results
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
-    printf("Hamming time:%f sec\n", calcTime);
+    printf("Hamming time:%f sec ", calcTime);
+    printf("| Sum Value:%d", calcSumOfArray(src->Alen, src->Blen, hammingValues));//TODO REMOVE ONLY FOR DEBUGGING DATA RACE
+    printf("\n");
     return calcTime;
 }
 
 double openMpHamm_taskB(structs *src, int serialHammingSum) {
 
     int sum = 0;
-
-    int **hammingValues = init2dArray(src->Alen, src->Blen);//TODO DE-ALLOCATE MEMORY
+    int **hammingValues = init2dArray(src->Alen, src->Blen);
 
     printf("OpenMP task B.....");
     double begin = gettime();
+    #pragma omp parallel
+    {
+        int i, j, k, psum = 0;
+        for(k=0;k<src->Strlen;k++){
+            #pragma omp for collapse(2)
+            for(i=0;i<src->Alen;i++){
+                for(j=0;j<src->Blen;j++){
+                    if (src->A[i][k] != src->B[j][k]) {
+                        hammingValues[i][j]++;
+                        psum++;
+                    }
+                }
+            }
+        }
 
-    //TODO MAIN LOGIC
-    //TODO sum++
+        #pragma omp atomic
+        sum += psum;
 
+    }
     double end = gettime();
     double calcTime = (double) (end - begin);
 
@@ -65,23 +81,36 @@ double openMpHamm_taskB(structs *src, int serialHammingSum) {
         return (double) (-1);
     }
 
+    //Print results
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
-    printf("Hamming time:%f sec\n", calcTime);
+    printf("Hamming time:%f sec ", calcTime);
+    printf("\n");
     return calcTime;
 }
 
 double openMpHamm_taskC(structs *src, int serialHammingSum) {
-
     int sum = 0;
-
-    int **hammingValues = init2dArray(src->Alen, src->Blen);//TODO DE-ALLOCATE MEMORY
+    int **hammingValues = init2dArray(src->Alen, src->Blen);
 
     printf("OpenMP task C.....");
     double begin = gettime();
-
-    //TODO MAIN LOGIC
-    //TODO sum++
-
+    #pragma omp parallel
+    {
+        int i, j, k, psum = 0;
+        for (i = 0; i < src->Alen; i++) {
+            for (k = 0; k < src->Strlen; k++) {
+                #pragma omp for
+                for (j = 0; j < src->Blen; j++) {
+                    if (src->A[i][k] != src->B[j][k]) {
+                        hammingValues[i][j]++;
+                        psum++;
+                    }
+                }
+            }
+        }
+        #pragma omp atomic
+        sum += psum;
+    }
     double end = gettime();
     double calcTime = (double) (end - begin);
 
@@ -92,7 +121,9 @@ double openMpHamm_taskC(structs *src, int serialHammingSum) {
         return (double) (-1);
     }
 
+    //Print results
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
-    printf("Hamming time:%f sec\n", calcTime);
+    printf("Hamming time:%f sec ", calcTime);
+    printf("\n");
     return calcTime;
 }
