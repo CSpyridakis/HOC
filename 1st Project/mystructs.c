@@ -1,7 +1,16 @@
+#include "mystructs.h"
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-#include "mystructs.h"
+#include <sys/time.h>
+
+
+double gettime() {
+    struct timeval ttime;
+    gettimeofday(&ttime, NULL);
+    return ttime.tv_sec + ttime.tv_usec * 0.000001;
+
+}
 
 /// Create and initialize 2d array
 int **init2dArray(int a, int b) {

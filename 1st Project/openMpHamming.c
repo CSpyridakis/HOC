@@ -1,94 +1,98 @@
+#include "openMpHamming.h"
 #include <stdio.h>
 #include <omp.h>
-#include <time.h>
-#include "openMpHamming.h"
-#include "mystructs.h"
+
 
 double openMpHamm_taskA(structs *src, int serialHammingSum) {
 
-    int sum=0;
+    int sum = 0;
 
-    int ** hammingValues=init2dArray(src->Alen, src->Blen);//TODO DE-ALLOCATE MEMORY
+    int **hammingValues = init2dArray(src->Alen, src->Blen);//TODO DE-ALLOCATE MEMORY
 
     printf("OpenMP task A.....");
-    clock_t begin = clock();
+    double begin = gettime();
+    #pragma omp parallel
+    {
+        int i, j, k, su = 0;
+        for (i = 0; i < src->Alen; i++) {
+            for (j = 0; j < src->Blen; j++) {
+                #pragma omp for
+                for (k = 0; k < src->Strlen; k++) {
+                    if (src->A[i][k] != src->B[j][k]) {
+                        su++;
+                    }
+                }
+            }
+        }
 
-    //Parrallel threads
-    //TODO create n threads where each uses part of string
-    int i,j;
-    for (i=0;i<src->Alen;i++){
-        for(j=0;j<src->Blen;j++){
-           // if(src->A[i][]==src->B[j][]){
-                //TODO increase value in hamming table
-                //TODO increase sum hamming table
-          //  }
+        #pragma omp critical
+        {
+            sum += su;
         }
     }
-
-    clock_t end = clock();
-    double calcTime=(double) (end - begin) / CLOCKS_PER_SEC;
+    double end = gettime();
+    double calcTime = end - begin;
 
     // Validate Hamming Distance
-    if (serialHammingSum!=sum) {
+    if (serialHammingSum != sum) {
         printf(ANSI_RED "Error!"ANSI_RESET"\n");
         return (double) (-1);
     }
 
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
-    printf("Hamming time:%f sec\n",calcTime);
+    printf("Hamming time:%f sec\n", calcTime);
     return calcTime;
 }
 
 double openMpHamm_taskB(structs *src, int serialHammingSum) {
 
-    int sum=0;
+    int sum = 0;
 
-    int ** hammingValues=init2dArray(src->Alen, src->Blen);//TODO DE-ALLOCATE MEMORY
+    int **hammingValues = init2dArray(src->Alen, src->Blen);//TODO DE-ALLOCATE MEMORY
 
     printf("OpenMP task B.....");
-    clock_t begin = clock();
+    double begin = gettime();
 
     //TODO MAIN LOGIC
     //TODO sum++
 
-    clock_t end = clock();
-    double calcTime=(double) (end - begin) / CLOCKS_PER_SEC;
+    double end = gettime();
+    double calcTime = (double) (end - begin);
 
     // Validate Hamming Distance
-    if (serialHammingSum!=sum) {
+    if (serialHammingSum != sum) {
         printf(ANSI_RED "Error!"ANSI_RESET"\n");
         return (double) (-1);
     }
 
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
-    printf("Hamming time:%f sec\n",calcTime);
+    printf("Hamming time:%f sec\n", calcTime);
     return calcTime;
 }
 
 double openMpHamm_taskC(structs *src, int serialHammingSum) {
 
-    int sum=0;
+    int sum = 0;
 
-    int ** hammingValues=init2dArray(src->Alen, src->Blen);//TODO DE-ALLOCATE MEMORY
+    int **hammingValues = init2dArray(src->Alen, src->Blen);//TODO DE-ALLOCATE MEMORY
 
     printf("OpenMP task C.....");
-    clock_t begin = clock();
+    double begin = gettime();
 
     //TODO MAIN LOGIC
     //TODO sum++
 
-    clock_t end = clock();
-    double calcTime=(double) (end - begin) / CLOCKS_PER_SEC;
+    double end = gettime();
+    double calcTime = (double) (end - begin);
 
 
     // Validate Hamming Distance
-    if (serialHammingSum!=sum) {
+    if (serialHammingSum != sum) {
         printf(ANSI_RED "Error!"ANSI_RESET"\n");
         return (double) (-1);
     }
 
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
-    printf("Hamming time:%f sec\n",calcTime);
+    printf("Hamming time:%f sec\n", calcTime);
     return calcTime;
 }
-

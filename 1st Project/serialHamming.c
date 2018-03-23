@@ -1,8 +1,6 @@
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "serialHamming.h"
 #include "mystructs.h"
+#include <stdio.h>
+#include "serialHamming.h"
 
 double serialHamm(structs *src, int *serialSum) {
     /// Init Serial Sum
@@ -13,7 +11,7 @@ double serialHamm(structs *src, int *serialSum) {
 
     /// Calculate Hamming Distance in NON-optimized (Serial) way
     printf("Serial............");
-    clock_t begin = clock();
+    double begin = gettime();
     int i, j, k;
     for (i = 0; i < src->Alen; i++) {
         for (j = 0; j < src->Blen; j++) {
@@ -25,11 +23,11 @@ double serialHamm(structs *src, int *serialSum) {
             }
         }
     }
-    clock_t end = clock();
-    double calcTime=(double) (end - begin) / CLOCKS_PER_SEC;
+    double end = gettime();
+    double calcTime=end - begin;
 
     // Display Serial Hamming values
-//    displayHammingValues(src->Alen, src->Blen, serialhammingValues);
+    //displayHammingValues(src->Alen, src->Blen, serialhammingValues);
 
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
     printf("Hamming time:%f sec | Sum Value:%d\n",calcTime,(*serialSum));
