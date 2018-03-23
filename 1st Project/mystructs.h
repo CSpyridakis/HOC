@@ -7,8 +7,8 @@
 #define ARRAY_A 4
 #define ARRAY_B 4
 #define STRINGS_L 3
-static int aLength[ARRAY_A] = {1000, 100, 1000, 10000};             // equals with number m
-static int bLength[ARRAY_B] = {1000, 100, 1000, 10000};             // equals with number n
+static int aLength[ARRAY_A] = {10000, 100, 1000, 10000};             // equals with number m
+static int bLength[ARRAY_B] = {10000, 100, 1000, 10000};             // equals with number n
 static int stringLength[STRINGS_L] = {1000, 100, 1000};             // equals with number l
 typedef int bool;
 
@@ -84,7 +84,7 @@ void printResults(hammingTimes *hammT);
  * @param hamV
  * @return
  */
-int calcSumOfArray(int alen, int blen, int **hamV);
+unsigned long long calcSumOfArray(int alen, int blen, int **hamV);
 
 
 #endif //PARALLEL_COSTUM_STRUCTS_H

@@ -4,6 +4,6 @@
 #include "mystructs.h"
 
 
-double pthreadsHamm_task(structs *src, int serialHammingSum, type task);
+double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type task);
 
 #endif //PARALLEL_PTHREADSHAMMING_H

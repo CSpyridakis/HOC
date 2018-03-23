@@ -17,9 +17,9 @@ void *taskC() {
 
 }
 
-double pthreadsHamm_task(structs *src, int serialHammingSum, type task) {
+double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type task) {
 
-    int sum = 0;
+    long sum = 0;
     int **hammingValues = init2dArray(src->Alen, src->Blen);
     int NUM_THREADS = get_nprocs();
     pthread_t threads[NUM_THREADS];
@@ -73,6 +73,8 @@ double pthreadsHamm_task(structs *src, int serialHammingSum, type task) {
     }
 
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
-    printf("Hamming time:%f sec\n", calcTime);
+    printf("Hamming time:%f sec ", calcTime);
+    printf("| Sum Value:%lld", calcSumOfArray(src->Alen, src->Blen, hammingValues));//TODO REMOVE ONLY FOR DEBUGGING DATA RACE
+    printf("\n");
     return calcTime;
 }

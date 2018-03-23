@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "serialHamming.h"
 
-double serialHamm(structs *src, int *serialSum) {
+double serialHamm(structs *src, unsigned long long *serialSum) {
     /// Init Serial Sum
     (*serialSum)=0;
 
@@ -30,7 +30,7 @@ double serialHamm(structs *src, int *serialSum) {
     //displayHammingValues(src->Alen, src->Blen, serialhammingValues);
 
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
-    printf("Hamming time:%f sec | Sum Value:%d\n",calcTime,(*serialSum));
+    printf("Hamming time:%f sec | Sum Value:%lld\n",calcTime,(*serialSum));
     return calcTime;
 }
 

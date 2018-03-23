@@ -11,7 +11,7 @@
  *
  * @return (double) calculation time. In case hamming distance is wrong return -1
  */
-double openMpHamm_taskA(structs *src, int serialHammingSum);
+double openMpHamm_taskA(structs *src, unsigned long long serialHammingSum);
 
 /**
  * @brief Calculate Hamming Distance using OpenMP//TODO
@@ -21,7 +21,7 @@ double openMpHamm_taskA(structs *src, int serialHammingSum);
  *
  * @return (double) calculation time. In case hamming distance is wrong return -1
  */
-double openMpHamm_taskB(structs *src, int serialHammingSum);
+double openMpHamm_taskB(structs *src, unsigned long long serialHammingSum);
 
 /**
  * @brief Calculate Hamming Distance using OpenMP//TODO
@@ -31,6 +31,6 @@ double openMpHamm_taskB(structs *src, int serialHammingSum);
  *
  * @return (double) calculation time. In case hamming distance is wrong return -1
  */
-double openMpHamm_taskC(structs *src, int serialHammingSum);
+double openMpHamm_taskC(structs *src, unsigned long long serialHammingSum);
 
 #endif //PARALLEL_OPENMPHAMMING_H

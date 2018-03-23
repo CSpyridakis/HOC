@@ -88,8 +88,9 @@ void displayHammingValues(int alen, int blen, int **serV) {
     }
 }
 
-int calcSumOfArray(int alen, int blen, int **hamV) {
-    int i, j, sum = 0;
+unsigned long long calcSumOfArray(int alen, int blen, int **hamV) {
+    int i, j;
+    unsigned long long sum = 0;
     for (i = 0; i < alen; i++) {
         for (j = 0; j < blen; j++) {
             sum += hamV[i][j];

@@ -11,6 +11,6 @@
  *
  * @return (double) seconds of execution
  */
-double serialHamm(structs *src, int *serialhammingValue);
+double serialHamm(structs *src, unsigned long long *serialhammingValue);
 
 #endif //PARALLEL_SERIALHAMMING_H

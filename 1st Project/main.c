@@ -20,7 +20,7 @@ int main() {
                 // Random Generate new Structs
                 structsGenerate(newStruct, aLength[i], bLength[j], stringLength[k]);
                 /// Save Hamming sum of serial calculation
-                int serialsum;
+                unsigned long long serialsum;
 
                 // Print loop information
                 printf("\nCalculating Hamming distances for m:%d n:%d l:%d\n", newStruct->Alen, newStruct->Blen,
