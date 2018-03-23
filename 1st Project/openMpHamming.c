@@ -57,7 +57,7 @@ double openMpHamm_taskB(structs *src, int serialHammingSum) {
     {
         int i, j, k, psum = 0;
         for(k=0;k<src->Strlen;k++){
-            #pragma omp for collapse(2)
+            #pragma omp for collapse(2) nowait
             for(i=0;i<src->Alen;i++){
                 for(j=0;j<src->Blen;j++){
                     if (src->A[i][k] != src->B[j][k]) {
@@ -84,6 +84,7 @@ double openMpHamm_taskB(structs *src, int serialHammingSum) {
     //Print results
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
     printf("Hamming time:%f sec ", calcTime);
+    printf("| Sum Value:%d", calcSumOfArray(src->Alen, src->Blen, hammingValues));//TODO REMOVE ONLY FOR DEBUGGING DATA RACE
     printf("\n");
     return calcTime;
 }
@@ -99,7 +100,7 @@ double openMpHamm_taskC(structs *src, int serialHammingSum) {
         int i, j, k, psum = 0;
         for (i = 0; i < src->Alen; i++) {
             for (k = 0; k < src->Strlen; k++) {
-                #pragma omp for
+                #pragma omp for nowait
                 for (j = 0; j < src->Blen; j++) {
                     if (src->A[i][k] != src->B[j][k]) {
                         hammingValues[i][j]++;
@@ -114,7 +115,6 @@ double openMpHamm_taskC(structs *src, int serialHammingSum) {
     double end = gettime();
     double calcTime = (double) (end - begin);
 
-
     // Validate Hamming Distance
     if (serialHammingSum != sum) {
         printf(ANSI_RED "Error!"ANSI_RESET"\n");
@@ -124,6 +124,7 @@ double openMpHamm_taskC(structs *src, int serialHammingSum) {
     //Print results
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
     printf("Hamming time:%f sec ", calcTime);
+    printf("| Sum Value:%d", calcSumOfArray(src->Alen, src->Blen, hammingValues));//TODO REMOVE ONLY FOR DEBUGGING DATA RACE
     printf("\n");
     return calcTime;
 }
