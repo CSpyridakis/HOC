@@ -30,7 +30,7 @@ int main() {
                 hammT[i][j][k].serial = serialHamm(newStruct, &serialsum);
 
                 /// OpenMp Hamming Calculation
-                //hammT[i][j][k].openMp[TASK_A] = openMpHamm_taskA(newStruct, serialsum);
+                hammT[i][j][k].openMp[TASK_A] = openMpHamm_taskA(newStruct, serialsum);
                 hammT[i][j][k].openMp[TASK_B] = openMpHamm_taskB(newStruct, serialsum);
                 hammT[i][j][k].openMp[TASK_C] = openMpHamm_taskC(newStruct, serialsum);
 
