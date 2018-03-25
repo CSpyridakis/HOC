@@ -5,7 +5,7 @@
 #include "openMpHamming.h"
 #include "pthreadsHamming.h"
 
-int main() {
+int main(int argc, char ** argv) {
 
     /// Save Hamming Calculation times for each case
     hammingTimes hammT[ARRAY_A][ARRAY_B][STRINGS_L];

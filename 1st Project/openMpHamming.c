@@ -5,7 +5,7 @@
 
 double openMpHamm_taskA(structs *src, unsigned long long serialHammingSum) {
 
-    long sum = 0;
+    unsigned long long sum = 0;
     int **hammingValues = init2dArray(src->Alen, src->Blen);
 
     printf("OpenMP task A.....");
@@ -57,7 +57,7 @@ double openMpHamm_taskA(structs *src, unsigned long long serialHammingSum) {
 
 double openMpHamm_taskB(structs *src, unsigned long long serialHammingSum) {
 
-    long sum = 0;
+    unsigned long long sum = 0;
     int **hammingValues = init2dArray(src->Alen, src->Blen);
 
     printf("OpenMP task B.....");
@@ -99,7 +99,7 @@ double openMpHamm_taskB(structs *src, unsigned long long serialHammingSum) {
 }
 
 double openMpHamm_taskC(structs *src, unsigned long long serialHammingSum) {
-    long sum = 0;
+    unsigned long long sum = 0;
     int **hammingValues = init2dArray(src->Alen, src->Blen);
 
     printf("OpenMP task C.....");
