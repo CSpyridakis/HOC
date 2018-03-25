@@ -12,7 +12,8 @@ double openMpHamm_taskA(structs *src, unsigned long long serialHammingSum) {
     double begin = gettime();
     #pragma omp parallel
     {
-        int i,j,k,t,psum=0;
+        int i,j,k,t;
+        unsigned long long psum=0;
 
         int NUM_THREADS=omp_get_num_threads();
         int THREAD_ID=omp_get_thread_num();
@@ -64,7 +65,8 @@ double openMpHamm_taskB(structs *src, unsigned long long serialHammingSum) {
     double begin = gettime();
     #pragma omp parallel
     {
-        int i, j, k, psum = 0;
+        int i, j, k;
+        unsigned long long psum = 0;
         for(k=0;k<src->Strlen;k++){
             #pragma omp for collapse(2) nowait
             for(i=0;i<src->Alen;i++){
@@ -106,7 +108,8 @@ double openMpHamm_taskC(structs *src, unsigned long long serialHammingSum) {
     double begin = gettime();
     #pragma omp parallel
     {
-        int i, j, k, psum = 0;
+        int i, j, k;
+        unsigned long long psum = 0;
         for (i = 0; i < src->Alen; i++) {
             for (k = 0; k < src->Strlen; k++) {
                 #pragma omp for nowait

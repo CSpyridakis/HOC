@@ -35,7 +35,7 @@ int main(int argc, char ** argv) {
                 hammT[i][j][k].openMp[TASK_C] = openMpHamm_taskC(newStruct, serialsum);
 
                 /// Pthreads Hamming Calculation
-                hammT[i][j][k].pthreads[TASK_A] = pthreadsHamm_task(newStruct, serialsum, TASK_A);
+//                hammT[i][j][k].pthreads[TASK_A] = pthreadsHamm_task(newStruct, serialsum, TASK_A);
                 hammT[i][j][k].pthreads[TASK_B] = pthreadsHamm_task(newStruct, serialsum, TASK_B);
                 hammT[i][j][k].pthreads[TASK_C] = pthreadsHamm_task(newStruct, serialsum, TASK_C);
 
