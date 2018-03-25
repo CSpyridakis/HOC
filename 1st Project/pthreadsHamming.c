@@ -16,24 +16,24 @@ structs *src_GLOBAL;
 
 //TODO : SUM WORKING , MUTEX LOCK PROBLEM
 void *taskA(void *tid) {
-    int i,j,k,t;
-    unsigned long long psum=0;
-    int id=*((int *)tid);
+    int i, j, k, t;
+    unsigned long long psum = 0;
+    int id = *((int *) tid);
 
-    for(t=0;t<NUM_THREADS;t++){
-        int start=(t+id)%NUM_THREADS;
+    for (t = 0; t < NUM_THREADS; t++) {
+        int start = (t + id) % NUM_THREADS;
         /// Pseudo - random Access
-        for(i=start;i<src_GLOBAL->Alen;i=i+NUM_THREADS){
+        for (i = start; i < src_GLOBAL->Alen; i = i + NUM_THREADS) {
             for (j = 0; j < src_GLOBAL->Blen; j++) {
                 /// Parallel loop
-                for (k = id; k < src_GLOBAL->Strlen; k=k+NUM_THREADS) {
+                for (k = id; k < src_GLOBAL->Strlen; k = k + NUM_THREADS) {
                     if (src_GLOBAL->A[i][k] != src_GLOBAL->B[j][k]) {
                         psum++;
 
                         // Mutex lock for data races
- //                       pthread_mutex_lock(&lock);
- //                       hammingValues_GLOBAL[i][j]++;
- //                       pthread_mutex_unlock(&lock);
+//                        pthread_mutex_lock(&lock);
+                        hammingValues_GLOBAL[i][j]++;
+//                        pthread_mutex_unlock(&lock);
                     }
                 }
             }
@@ -42,19 +42,35 @@ void *taskA(void *tid) {
 
     // Mutex lock for data races
     pthread_mutex_lock(&lock);
-    sum_GLOBAL+=psum;
+    sum_GLOBAL += psum;
     pthread_mutex_unlock(&lock);
 }
 
 void *taskB(void *tid) {
-    int i,j,k,psum=0;
-    int id=*((int *)tid);
+
+    int i, j, k, psum = 0;
+    int id = *((int *) tid);
 
     int index;
-    for(index=id;index<src_GLOBAL->Alen*src_GLOBAL->Blen;index=index+NUM_THREADS){
-        i=index/src_GLOBAL->Alen;
-        j=index%src_GLOBAL->Alen;
-        for(k=0;k<src_GLOBAL->Strlen;k++){
+    for (index = id; index < src_GLOBAL->Alen * src_GLOBAL->Blen; index = index + NUM_THREADS) {
+        //TODO : FIX SEGMENTATION
+
+        if(src_GLOBAL->Alen==1){
+            i=0;
+            j=index;
+        }
+        else if(src_GLOBAL->Blen==1){
+            j=0;
+            i=index;
+        }
+        else{
+            i = index % src_GLOBAL->Alen;
+            j = index / src_GLOBAL->Alen;
+        }
+
+//        printf("ID:%d\tIndex:%d    ti:%d  j:%d\n",id,index,i,j);
+
+        for (k = 0; k < src_GLOBAL->Strlen; k++) {
             if (src_GLOBAL->A[i][k] != src_GLOBAL->B[j][k]) {
                 hammingValues_GLOBAL[i][j]++;
                 psum++;
@@ -63,17 +79,17 @@ void *taskB(void *tid) {
     }
 
     pthread_mutex_lock(&lock);
-    sum_GLOBAL+=psum;
+    sum_GLOBAL += psum;
     pthread_mutex_unlock(&lock);
 }
 
 void *taskC(void *tid) {
-    int i,j,k,psum=0;
-    int id=*((int *)tid);
+    int i, j, k, psum = 0;
+    int id = *((int *) tid);
 
     for (i = 0; i < src_GLOBAL->Alen; i++) {
         for (k = 0; k < src_GLOBAL->Strlen; k++) {
-            for (j = id; j < src_GLOBAL->Blen; j=j+NUM_THREADS) {
+            for (j = id; j < src_GLOBAL->Blen; j = j + NUM_THREADS) {
                 if (src_GLOBAL->A[i][k] != src_GLOBAL->B[j][k]) {
                     hammingValues_GLOBAL[i][j]++;
                     psum++;
@@ -83,18 +99,17 @@ void *taskC(void *tid) {
     }
 
     pthread_mutex_lock(&lock);
-    sum_GLOBAL+=psum;
+    sum_GLOBAL += psum;
     pthread_mutex_unlock(&lock);
 }
 
 
+void structcpy(structs *src) {
+    int i, j;
 
-void structcpy(structs *src){
-    int i,j;
-
-    src_GLOBAL->Alen=src->Alen;
-    src_GLOBAL->Blen=src->Blen;
-    src_GLOBAL->Strlen=src->Strlen;
+    src_GLOBAL->Alen = src->Alen;
+    src_GLOBAL->Blen = src->Blen;
+    src_GLOBAL->Strlen = src->Strlen;
 
     src_GLOBAL->A = (char **) malloc(sizeof(char *) * src_GLOBAL->Alen);
     for (i = 0; i < src_GLOBAL->Alen; i++) {
@@ -120,7 +135,7 @@ double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type
         return -1;
     }
 
-    src_GLOBAL= (structs *) malloc(sizeof(structs));
+    src_GLOBAL = (structs *) malloc(sizeof(structs));
     structcpy(src);
 
     NUM_THREADS = get_nprocs();
@@ -130,7 +145,7 @@ double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type
     int ptd, i;
 
     unsigned long long sum = 0;
-    sum_GLOBAL=0;
+    sum_GLOBAL = 0;
     hammingValues_GLOBAL = init2dArray(src->Alen, src->Blen);
 
     if (task == TASK_A) { printf("PThreads task A..."); }
@@ -143,7 +158,7 @@ double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type
             begin = gettime();
             // Create threads
             for (i = 0; i < NUM_THREADS; i++) {
-                tid[i]=i;
+                tid[i] = i;
                 ptd = pthread_create(&threads[i], NULL, taskA, (void *) &tid[i]);
                 assert(!ptd);
             }
@@ -151,7 +166,7 @@ double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type
             begin = gettime();
             // Create threads
             for (i = 0; i < NUM_THREADS; i++) {
-                tid[i]=i;
+                tid[i] = i;
                 ptd = pthread_create(&threads[i], NULL, taskB, (void *) &tid[i]);
                 assert(!ptd);
             }
@@ -159,7 +174,7 @@ double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type
             begin = gettime();
             // Create threads
             for (i = 0; i < NUM_THREADS; i++) {
-                tid[i]=i;
+                tid[i] = i;
                 ptd = pthread_create(&threads[i], NULL, taskC, (void *) &tid[i]);
                 assert(!ptd);
             }
@@ -174,17 +189,19 @@ double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type
     double end = gettime();
     double calcTime = end - begin;
     deallsrc(src_GLOBAL);
-    sum=sum_GLOBAL;
+    sum = sum_GLOBAL;
+    pthread_mutex_destroy(&lock);
 
     // Validate Hamming Distance
-    if (serialHammingSum != sum) {
+    if (serialHammingSum != calcSumOfArray(src->Alen, src->Blen, hammingValues_GLOBAL)) {//sum) {
         printf(ANSI_RED "Error!"ANSI_RESET"\n");
         return (double) (-1);
     }
 
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
     printf("Hamming time:%f sec ", calcTime);
-    printf("| Sum Value:%lld", calcSumOfArray(src->Alen, src->Blen, hammingValues_GLOBAL));//TODO REMOVE ONLY FOR DEBUGGING DATA RACE
+    printf("| Sum Value:%lld",
+           calcSumOfArray(src->Alen, src->Blen, hammingValues_GLOBAL));//TODO REMOVE ONLY FOR DEBUGGING DATA RACE
     printf("\n");
     return calcTime;
 }
