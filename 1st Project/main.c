@@ -41,11 +41,8 @@ int main(int argc, char ** argv) {
 
                 // De-allocate memory
                 deallsrc(newStruct);
-//                break;
             }
-//            break;
         }
-//        break;
     }
 
     //Display Results for each case

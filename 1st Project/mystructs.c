@@ -12,9 +12,7 @@ double gettime() {
 
 }
 
-/// Create and initialize 2d array
 int **init2dArray(int a, int b) {
-
     int i, j;
     int **serV;
 
@@ -44,7 +42,7 @@ void structsGenerate(structs *src, int alen, int blen, int strlen) {
     // Initialize random
     srand(time(NULL));
 
-    /// Create two two dimension RANDOM char arrays
+    /// Create two 2d RANDOM char arrays
     src->A = (char **) malloc(sizeof(char *) * src->Alen);
     for (i = 0; i < src->Alen; i++) {
         src->A[i] = (char *) malloc(sizeof(char) * src->Strlen);

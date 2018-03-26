@@ -23,6 +23,7 @@ double openMpHamm_taskA(structs *src, unsigned long long serialHammingSum) {
             int start=(t+THREAD_ID)%NUM_THREADS;
             for(i=start;i<src->Alen;i=i+NUM_THREADS){
                 for (j = 0; j < src->Blen; j++) {
+                    /// Parallel section
                     #pragma omp for nowait
                     for (k = 0; k < src->Strlen; k++) {
                         if (src->A[i][k] != src->B[j][k]) {
@@ -51,7 +52,7 @@ double openMpHamm_taskA(structs *src, unsigned long long serialHammingSum) {
     //Print results
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
     printf("Hamming time:%f sec ", calcTime);
-    printf("| Sum Value:%lld", calcSumOfArray(src->Alen, src->Blen, hammingValues));//TODO REMOVE ONLY FOR DEBUGGING DATA RACE
+    if(DEBUG) { printf("| Sum Value:%lld", calcSumOfArray(src->Alen, src->Blen, hammingValues)); }
     printf("\n");
     return calcTime;
 }
@@ -68,6 +69,7 @@ double openMpHamm_taskB(structs *src, unsigned long long serialHammingSum) {
         int i, j, k;
         unsigned long long psum = 0;
         for(k=0;k<src->Strlen;k++){
+            /// Parallel section
             #pragma omp for collapse(2) nowait
             for(i=0;i<src->Alen;i++){
                 for(j=0;j<src->Blen;j++){
@@ -95,7 +97,7 @@ double openMpHamm_taskB(structs *src, unsigned long long serialHammingSum) {
     //Print results
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
     printf("Hamming time:%f sec ", calcTime);
-    printf("| Sum Value:%lld", calcSumOfArray(src->Alen, src->Blen, hammingValues));//TODO REMOVE ONLY FOR DEBUGGING DATA RACE
+    if(DEBUG) { printf("| Sum Value:%lld", calcSumOfArray(src->Alen, src->Blen, hammingValues));}
     printf("\n");
     return calcTime;
 }
@@ -112,6 +114,7 @@ double openMpHamm_taskC(structs *src, unsigned long long serialHammingSum) {
         unsigned long long psum = 0;
         for (i = 0; i < src->Alen; i++) {
             for (k = 0; k < src->Strlen; k++) {
+                /// Parallel section
                 #pragma omp for nowait
                 for (j = 0; j < src->Blen; j++) {
                     if (src->A[i][k] != src->B[j][k]) {
@@ -136,7 +139,7 @@ double openMpHamm_taskC(structs *src, unsigned long long serialHammingSum) {
     //Print results
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
     printf("Hamming time:%f sec ", calcTime);
-    printf("| Sum Value:%lld", calcSumOfArray(src->Alen, src->Blen, hammingValues));//TODO REMOVE ONLY FOR DEBUGGING DATA RACE
+    if(DEBUG) {  printf("| Sum Value:%lld", calcSumOfArray(src->Alen, src->Blen, hammingValues));}
     printf("\n");
     return calcTime;
 }

@@ -6,6 +6,7 @@
 #include <sys/sysinfo.h>
 #include <assert.h>
 
+//Pthreads variables
 pthread_mutex_t lock;
 int NUM_THREADS;
 
@@ -25,7 +26,7 @@ void *taskA(void *tid) {
         /// Pseudo - random Access
         for (i = start; i < src_GLOBAL->Alen; i = i + NUM_THREADS) {
             for (j = 0; j < src_GLOBAL->Blen; j++) {
-                /// Parallel loop
+                /// Parallel section
                 for (k = id; k < src_GLOBAL->Strlen; k = k + NUM_THREADS) {
                     if (src_GLOBAL->A[i][k] != src_GLOBAL->B[j][k]) {
                         psum++;
@@ -51,10 +52,11 @@ void *taskB(void *tid) {
     int i, j, k, psum = 0;
     int id = *((int *) tid);
 
+    /// Parallel section
     int index;
     for (index = id; index < src_GLOBAL->Alen * src_GLOBAL->Blen; index = index + NUM_THREADS) {
-        //TODO : FIX SEGMENTATION
 
+        //Calculate i and j
         if(src_GLOBAL->Alen==1){
             i=0;
             j=index;
@@ -67,8 +69,6 @@ void *taskB(void *tid) {
             i = index % src_GLOBAL->Alen;
             j = index / src_GLOBAL->Alen;
         }
-
-//        printf("ID:%d\tIndex:%d    ti:%d  j:%d\n",id,index,i,j);
 
         for (k = 0; k < src_GLOBAL->Strlen; k++) {
             if (src_GLOBAL->A[i][k] != src_GLOBAL->B[j][k]) {
@@ -89,6 +89,7 @@ void *taskC(void *tid) {
 
     for (i = 0; i < src_GLOBAL->Alen; i++) {
         for (k = 0; k < src_GLOBAL->Strlen; k++) {
+            /// Parallel section
             for (j = id; j < src_GLOBAL->Blen; j = j + NUM_THREADS) {
                 if (src_GLOBAL->A[i][k] != src_GLOBAL->B[j][k]) {
                     hammingValues_GLOBAL[i][j]++;
@@ -103,7 +104,11 @@ void *taskC(void *tid) {
     pthread_mutex_unlock(&lock);
 }
 
-
+/**
+ * @brief Copy attribute src into a global src
+ *
+ * @param src
+ */
 void structcpy(structs *src) {
     int i, j;
 
@@ -130,27 +135,29 @@ void structcpy(structs *src) {
 
 double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type task) {
 
+    if (task == TASK_A) { printf("PThreads task A..."); }
+    else if (task == TASK_B) { printf("PThreads task B..."); }
+    else { printf("PThreads task C..."); }
+
     if (pthread_mutex_init(&lock, NULL) != 0) {
-        printf("\n"ANSI_RED"MUTEX INIT FAILED"ANSI_RESET"\n");
+        printf(ANSI_RED"MUTEX INIT FAILED"ANSI_RESET"\n");
         return -1;
     }
 
+    //Copy local src
     src_GLOBAL = (structs *) malloc(sizeof(structs));
     structcpy(src);
 
+    //Thread needed variables
     NUM_THREADS = get_nprocs();
-
     pthread_t threads[NUM_THREADS];
     int tid[NUM_THREADS];
     int ptd, i;
 
+    //Initialize variables
     unsigned long long sum = 0;
     sum_GLOBAL = 0;
     hammingValues_GLOBAL = init2dArray(src->Alen, src->Blen);
-
-    if (task == TASK_A) { printf("PThreads task A..."); }
-    else if (task == TASK_B) { printf("PThreads task B..."); }
-    else { printf("PThreads task C..."); }
 
     double begin;
     {
@@ -188,6 +195,8 @@ double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type
     }
     double end = gettime();
     double calcTime = end - begin;
+
+
     deallsrc(src_GLOBAL);
     sum = sum_GLOBAL;
     pthread_mutex_destroy(&lock);
@@ -198,10 +207,10 @@ double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type
         return (double) (-1);
     }
 
+    //Print results
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
     printf("Hamming time:%f sec ", calcTime);
-    printf("| Sum Value:%lld",
-           calcSumOfArray(src->Alen, src->Blen, hammingValues_GLOBAL));//TODO REMOVE ONLY FOR DEBUGGING DATA RACE
+    if(DEBUG){ printf("| Sum Value:%lld", calcSumOfArray(src->Alen, src->Blen, hammingValues_GLOBAL));}
     printf("\n");
     return calcTime;
 }

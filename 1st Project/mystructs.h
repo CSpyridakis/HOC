@@ -9,17 +9,20 @@
 #define STRINGS_L 3
 static int aLength[ARRAY_A] = {1, 100, 1000, 10000};             // equals with number m
 static int bLength[ARRAY_B] = {1, 100, 1000, 10000};             // equals with number n
-static int stringLength[STRINGS_L] = {10, 100, 1000};             // equals with number l
+static int stringLength[STRINGS_L] = {10, 100, 1000};            // equals with number l
 typedef int bool;
-
-#define true 1
-#define false 0
 
 #define type int
 #define TASK_A 0
 #define TASK_B 1
 #define TASK_C 2
 
+/**
+ * @brief Message printing variables
+ */
+#define true 1
+#define false 0
+#define DEBUG false
 #define ANSI_RED     "\x1b[31m"
 #define ANSI_GREEN   "\x1b[32m"
 #define ANSI_RESET   "\x1b[0m"
@@ -44,13 +47,24 @@ typedef struct structsR {
     int Strlen;
 } structs;
 
-
+/**
+ * @brief Use it in order to calculate execution time of code
+ *
+ * @return time (double)
+ */
 double gettime();
 
+/**
+ * @brief Initialize with 0 a 2d MxN array
+ *
+ * @param a length of dimension M
+ * @param b length of dimension N
+ * @return 2d initialized array
+ */
 int **init2dArray(int a, int b);
 
 /**
- * @brief Use this function in order to generate a struct that contains two two dimensional arrays with metadata information
+ * @brief Use this function in order to generate a struct that contains two 2d arrays with metadata information
  *
  * @param src       Struct that is created
  * @param alen      Number of columns for array A
@@ -78,11 +92,13 @@ void displayHammingValues(int alen, int blen, int **serV);
 void printResults(hammingTimes *hammT);
 
 /**
- * @brief ONLY FOR DEBUGGING DATA RACES
- * @param alen
- * @param blen
- * @param hamV
- * @return
+ * @brief ONLY FOR DEBUGGING DATA RACES, calculate total sum of hamming table MxN
+ *
+ * @param alen  Length of dimension M
+ * @param blen  Length of dimension N
+ * @param hamV  hamming table
+ *
+ * @return  Total sum (unsigned long long)
  */
 unsigned long long calcSumOfArray(int alen, int blen, int **hamV);
 

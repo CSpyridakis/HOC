@@ -7,7 +7,7 @@ double serialHamm(structs *src, unsigned long long *serialSum) {
     (*serialSum)=0;
 
     /// Save hamming distances
-    int **serialhammingValues = init2dArray(src->Alen, src->Blen);//TODO DE-ALLOCATE MEMORY
+    int **serialhammingValues = init2dArray(src->Alen, src->Blen);
 
     /// Calculate Hamming Distance in NON-optimized (Serial) way
     printf("Serial............");
