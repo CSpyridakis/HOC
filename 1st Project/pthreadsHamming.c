@@ -8,6 +8,7 @@
 
 //Pthreads variables
 pthread_mutex_t lock;
+pthread_mutex_t *hammIlock;
 int NUM_THREADS;
 
 //Global Variables, Shared between Threads
@@ -15,11 +16,11 @@ unsigned long long sum_GLOBAL;
 int **hammingValues_GLOBAL;
 structs *src_GLOBAL;
 
-//TODO : SUM WORKING , MUTEX LOCK PROBLEM
 void *taskA(void *tid) {
     int i, j, k, t;
     unsigned long long psum = 0;
     int id = *((int *) tid);
+    int isum;
 
     for (t = 0; t < NUM_THREADS; t++) {
         int start = (t + id) % NUM_THREADS;
@@ -27,16 +28,17 @@ void *taskA(void *tid) {
         for (i = start; i < src_GLOBAL->Alen; i = i + NUM_THREADS) {
             for (j = 0; j < src_GLOBAL->Blen; j++) {
                 /// Parallel section
+                isum = 0;
                 for (k = id; k < src_GLOBAL->Strlen; k = k + NUM_THREADS) {
                     if (src_GLOBAL->A[i][k] != src_GLOBAL->B[j][k]) {
                         psum++;
-
-                        // Mutex lock for data races
-//                        pthread_mutex_lock(&lock);
-                        hammingValues_GLOBAL[i][j]++;
-//                        pthread_mutex_unlock(&lock);
+                        isum++;
                     }
                 }
+                // Mutex lock for data races
+                pthread_mutex_lock(&hammIlock[i]);
+                hammingValues_GLOBAL[i][j] += isum;
+                pthread_mutex_unlock(&hammIlock[i]);
             }
         }
     }
@@ -57,15 +59,13 @@ void *taskB(void *tid) {
     for (index = id; index < src_GLOBAL->Alen * src_GLOBAL->Blen; index = index + NUM_THREADS) {
 
         //Calculate i and j
-        if(src_GLOBAL->Alen==1){
-            i=0;
-            j=index;
-        }
-        else if(src_GLOBAL->Blen==1){
-            j=0;
-            i=index;
-        }
-        else{
+        if (src_GLOBAL->Alen == 1) {
+            i = 0;
+            j = index;
+        } else if (src_GLOBAL->Blen == 1) {
+            j = 0;
+            i = index;
+        } else {
             i = index % src_GLOBAL->Alen;
             j = index / src_GLOBAL->Alen;
         }
@@ -135,6 +135,8 @@ void structcpy(structs *src) {
 
 double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type task) {
 
+    int i;
+
     if (task == TASK_A) { printf("PThreads task A..."); }
     else if (task == TASK_B) { printf("PThreads task B..."); }
     else { printf("PThreads task C..."); }
@@ -142,6 +144,14 @@ double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type
     if (pthread_mutex_init(&lock, NULL) != 0) {
         printf(ANSI_RED"MUTEX INIT FAILED"ANSI_RESET"\n");
         return -1;
+    }
+
+    hammIlock = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t) * src->Alen);
+    for (i = 0; i < src->Alen; i++) {
+        if (pthread_mutex_init(&hammIlock[i], NULL) != 0) {
+            printf(ANSI_RED"MUTEX INIT FAILED"ANSI_RESET"\n");
+            return -1;
+        }
     }
 
     //Copy local src
@@ -152,7 +162,7 @@ double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type
     NUM_THREADS = get_nprocs();
     pthread_t threads[NUM_THREADS];
     int tid[NUM_THREADS];
-    int ptd, i;
+    int ptd;
 
     //Initialize variables
     unsigned long long sum = 0;
@@ -200,9 +210,12 @@ double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type
     deallsrc(src_GLOBAL);
     sum = sum_GLOBAL;
     pthread_mutex_destroy(&lock);
+    for (i = 0; i < src->Alen; i++) {
+        pthread_mutex_destroy(&hammIlock[i]);
+    }
 
     // Validate Hamming Distance
-    if (serialHammingSum != calcSumOfArray(src->Alen, src->Blen, hammingValues_GLOBAL)) {//sum) {
+    if (serialHammingSum != sum) {
         printf(ANSI_RED "Error!"ANSI_RESET"\n");
         return (double) (-1);
     }
@@ -210,7 +223,9 @@ double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type
     //Print results
     printf(ANSI_GREEN"finished"ANSI_RESET"\t ");
     printf("Hamming time:%f sec ", calcTime);
-    if(DEBUG){ printf("| Sum Value:%lld", calcSumOfArray(src->Alen, src->Blen, hammingValues_GLOBAL));}
+    if (DEBUG) { printf("| Sum Value:%lld", calcSumOfArray(src->Alen, src->Blen, hammingValues_GLOBAL)); }
     printf("\n");
+
+    dealhamm(src_GLOBAL->Alen, src_GLOBAL->Blen, hammingValues_GLOBAL);//If you need hamming table comment out this line
     return calcTime;
 }

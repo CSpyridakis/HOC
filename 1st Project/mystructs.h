@@ -81,6 +81,15 @@ void structsGenerate(structs *src, int alen, int blen, int strlen);
 void deallsrc(structs *src);
 
 /**
+ * @brief De-allocate memory of hamming table MxN
+ *
+ * @param m length of M
+ * @param n length of N
+ * @param hammta hamming table
+ */
+void dealhamm(int m,int n, int ** hammta);
+
+/**
  * @brief Just for debugging purpose print Serial calculated Hamming Values
  *
  * @param alen Number of rows of serV array

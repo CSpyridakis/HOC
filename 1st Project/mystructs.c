@@ -72,6 +72,15 @@ void deallsrc(structs *src) {
     free(src);
 }
 
+void dealhamm(int m,int n, int ** hammta){
+    int i;
+
+    for (i = 0; i < m; i++) {
+        free(hammta[i]);
+    }
+    free(hammta);
+}
+
 void printResults(hammingTimes *hammT) {
     //TODO MAIN LOGIC
 }

@@ -141,5 +141,8 @@ double openMpHamm_taskC(structs *src, unsigned long long serialHammingSum) {
     printf("Hamming time:%f sec ", calcTime);
     if(DEBUG) {  printf("| Sum Value:%lld", calcSumOfArray(src->Alen, src->Blen, hammingValues));}
     printf("\n");
+
+    dealhamm(src->Alen,src->Blen,hammingValues);//If you need hamming table comment out this line
+
     return calcTime;
 }
