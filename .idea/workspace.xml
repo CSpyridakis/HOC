@@ -9,13 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="850f4d0c-95aa-4f13-b986-27a7a3dc6650" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/1st Project/mystructs.h" afterPath="$PROJECT_DIR$/1st Project/mystructs.h" />
-      <change beforePath="$PROJECT_DIR$/1st Project/openMpHamming.c" afterPath="$PROJECT_DIR$/1st Project/openMpHamming.c" />
-      <change beforePath="$PROJECT_DIR$/1st Project/pthreadsHamming.c" afterPath="$PROJECT_DIR$/1st Project/pthreadsHamming.c" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" />
-    </list>
+    <list default="true" id="850f4d0c-95aa-4f13-b986-27a7a3dc6650" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -223,12 +217,12 @@
       <workItem from="1521989828067" duration="509000" />
       <workItem from="1522011015048" duration="9636000" />
       <workItem from="1522052218327" duration="1801000" />
-      <workItem from="1522169831714" duration="1726000" />
+      <workItem from="1522169831714" duration="1946000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59639000" />
+    <option name="totallyTimeSpent" value="59859000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">

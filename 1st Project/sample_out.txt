@@ -1,0 +1,432 @@
+
+Calculating Hamming distances for m:1 n:1 l:10
+Serial............finished	 Hamming time:0.000001 sec | Sum Value:5
+OpenMP task A.....finished	 Hamming time:0.015465 sec 
+OpenMP task B.....finished	 Hamming time:0.000007 sec 
+OpenMP task C.....finished	 Hamming time:0.000002 sec 
+PThreads task A...finished	 Hamming time:0.015169 sec 
+PThreads task B...finished	 Hamming time:0.000248 sec 
+PThreads task C...finished	 Hamming time:0.000284 sec 
+
+Calculating Hamming distances for m:1 n:1 l:100
+Serial............finished	 Hamming time:0.000001 sec | Sum Value:50
+OpenMP task A.....finished	 Hamming time:0.000048 sec 
+OpenMP task B.....finished	 Hamming time:0.000006 sec 
+OpenMP task C.....finished	 Hamming time:0.000005 sec 
+PThreads task A...finished	 Hamming time:0.000128 sec 
+PThreads task B...finished	 Hamming time:0.000100 sec 
+PThreads task C...finished	 Hamming time:0.000100 sec 
+
+Calculating Hamming distances for m:1 n:1 l:1000
+Serial............finished	 Hamming time:0.000011 sec | Sum Value:471
+OpenMP task A.....finished	 Hamming time:0.000015 sec 
+OpenMP task B.....finished	 Hamming time:0.000035 sec 
+OpenMP task C.....finished	 Hamming time:0.000028 sec 
+PThreads task A...finished	 Hamming time:0.000108 sec 
+PThreads task B...finished	 Hamming time:0.000106 sec 
+PThreads task C...finished	 Hamming time:0.000133 sec 
+
+Calculating Hamming distances for m:1 n:100 l:10
+Serial............finished	 Hamming time:0.000013 sec | Sum Value:502
+OpenMP task A.....finished	 Hamming time:0.000012 sec 
+OpenMP task B.....finished	 Hamming time:0.000005 sec 
+OpenMP task C.....finished	 Hamming time:0.000004 sec 
+PThreads task A...finished	 Hamming time:0.000138 sec 
+PThreads task B...finished	 Hamming time:0.000108 sec 
+PThreads task C...finished	 Hamming time:0.000108 sec 
+
+Calculating Hamming distances for m:1 n:100 l:100
+Serial............finished	 Hamming time:0.000107 sec | Sum Value:4922
+OpenMP task A.....finished	 Hamming time:0.000090 sec 
+OpenMP task B.....finished	 Hamming time:0.000028 sec 
+OpenMP task C.....finished	 Hamming time:0.000031 sec 
+PThreads task A...finished	 Hamming time:0.000228 sec 
+PThreads task B...finished	 Hamming time:0.000204 sec 
+PThreads task C...finished	 Hamming time:0.000214 sec 
+
+Calculating Hamming distances for m:1 n:100 l:1000
+Serial............finished	 Hamming time:0.001059 sec | Sum Value:49674
+OpenMP task A.....finished	 Hamming time:0.000795 sec 
+OpenMP task B.....finished	 Hamming time:0.000272 sec 
+OpenMP task C.....finished	 Hamming time:0.000281 sec 
+PThreads task A...finished	 Hamming time:0.010153 sec 
+PThreads task B...finished	 Hamming time:0.001104 sec 
+PThreads task C...finished	 Hamming time:0.002185 sec 
+
+Calculating Hamming distances for m:1 n:1000 l:10
+Serial............finished	 Hamming time:0.000107 sec | Sum Value:4928
+OpenMP task A.....finished	 Hamming time:0.000094 sec 
+OpenMP task B.....finished	 Hamming time:0.000022 sec 
+OpenMP task C.....finished	 Hamming time:0.000021 sec 
+PThreads task A...finished	 Hamming time:0.001707 sec 
+PThreads task B...finished	 Hamming time:0.000267 sec 
+PThreads task C...finished	 Hamming time:0.000220 sec 
+
+Calculating Hamming distances for m:1 n:1000 l:100
+Serial............finished	 Hamming time:0.001068 sec | Sum Value:50031
+OpenMP task A.....finished	 Hamming time:0.000324 sec 
+OpenMP task B.....finished	 Hamming time:0.000201 sec 
+OpenMP task C.....finished	 Hamming time:0.000203 sec 
+PThreads task A...finished	 Hamming time:0.008307 sec 
+PThreads task B...finished	 Hamming time:0.001171 sec 
+PThreads task C...finished	 Hamming time:0.001217 sec 
+
+Calculating Hamming distances for m:1 n:1000 l:1000
+Serial............finished	 Hamming time:0.008986 sec | Sum Value:499842
+OpenMP task A.....finished	 Hamming time:0.003086 sec 
+OpenMP task B.....finished	 Hamming time:0.002807 sec 
+OpenMP task C.....finished	 Hamming time:0.001904 sec 
+PThreads task A...finished	 Hamming time:0.011310 sec 
+PThreads task B...finished	 Hamming time:0.003317 sec 
+PThreads task C...finished	 Hamming time:0.003757 sec 
+
+Calculating Hamming distances for m:1 n:10000 l:10
+Serial............finished	 Hamming time:0.001164 sec | Sum Value:49928
+OpenMP task A.....finished	 Hamming time:0.000616 sec 
+OpenMP task B.....finished	 Hamming time:0.000198 sec 
+OpenMP task C.....finished	 Hamming time:0.000279 sec 
+PThreads task A...finished	 Hamming time:0.005767 sec 
+PThreads task B...finished	 Hamming time:0.007263 sec 
+PThreads task C...finished	 Hamming time:0.000790 sec 
+
+Calculating Hamming distances for m:1 n:10000 l:100
+Serial............finished	 Hamming time:0.008976 sec | Sum Value:499558
+OpenMP task A.....finished	 Hamming time:0.017614 sec 
+OpenMP task B.....finished	 Hamming time:0.001978 sec 
+OpenMP task C.....finished	 Hamming time:0.001932 sec 
+PThreads task A...finished	 Hamming time:0.012240 sec 
+PThreads task B...finished	 Hamming time:0.003395 sec 
+PThreads task C...finished	 Hamming time:0.004221 sec 
+
+Calculating Hamming distances for m:1 n:10000 l:1000
+Serial............finished	 Hamming time:0.089365 sec | Sum Value:5000582
+OpenMP task A.....finished	 Hamming time:0.030899 sec 
+OpenMP task B.....finished	 Hamming time:0.025485 sec 
+OpenMP task C.....finished	 Hamming time:0.026001 sec 
+PThreads task A...finished	 Hamming time:0.027085 sec 
+PThreads task B...finished	 Hamming time:0.024657 sec 
+PThreads task C...finished	 Hamming time:0.036008 sec 
+
+Calculating Hamming distances for m:100 n:1 l:10
+Serial............finished	 Hamming time:0.000010 sec | Sum Value:519
+OpenMP task A.....finished	 Hamming time:0.007063 sec 
+OpenMP task B.....finished	 Hamming time:0.006749 sec 
+OpenMP task C.....finished	 Hamming time:0.000032 sec 
+PThreads task A...finished	 Hamming time:0.000173 sec 
+PThreads task B...finished	 Hamming time:0.000119 sec 
+PThreads task C...finished	 Hamming time:0.000130 sec 
+
+Calculating Hamming distances for m:100 n:1 l:100
+Serial............finished	 Hamming time:0.000106 sec | Sum Value:4915
+OpenMP task A.....finished	 Hamming time:0.000032 sec 
+OpenMP task B.....finished	 Hamming time:0.000030 sec 
+OpenMP task C.....finished	 Hamming time:0.000264 sec 
+PThreads task A...finished	 Hamming time:0.000233 sec 
+PThreads task B...finished	 Hamming time:0.000206 sec 
+PThreads task C...finished	 Hamming time:0.000374 sec 
+
+Calculating Hamming distances for m:100 n:1 l:1000
+Serial............finished	 Hamming time:0.001059 sec | Sum Value:50123
+OpenMP task A.....finished	 Hamming time:0.000281 sec 
+OpenMP task B.....finished	 Hamming time:0.000262 sec 
+OpenMP task C.....finished	 Hamming time:0.002629 sec 
+PThreads task A...finished	 Hamming time:0.001154 sec 
+PThreads task B...finished	 Hamming time:0.001135 sec 
+PThreads task C...finished	 Hamming time:0.002753 sec 
+
+Calculating Hamming distances for m:100 n:100 l:10
+Serial............finished	 Hamming time:0.001168 sec | Sum Value:49832
+OpenMP task A.....finished	 Hamming time:0.000395 sec 
+OpenMP task B.....finished	 Hamming time:0.000122 sec 
+OpenMP task C.....finished	 Hamming time:0.000166 sec 
+PThreads task A...finished	 Hamming time:0.012451 sec 
+PThreads task B...finished	 Hamming time:0.002613 sec 
+PThreads task C...finished	 Hamming time:0.000456 sec 
+
+Calculating Hamming distances for m:100 n:100 l:100
+Serial............finished	 Hamming time:0.009941 sec | Sum Value:499926
+OpenMP task A.....finished	 Hamming time:0.002428 sec 
+OpenMP task B.....finished	 Hamming time:0.001177 sec 
+OpenMP task C.....finished	 Hamming time:0.002342 sec 
+PThreads task A...finished	 Hamming time:0.015981 sec 
+PThreads task B...finished	 Hamming time:0.003029 sec 
+PThreads task C...finished	 Hamming time:0.003205 sec 
+
+Calculating Hamming distances for m:100 n:100 l:1000
+Serial............finished	 Hamming time:0.091532 sec | Sum Value:4997980
+OpenMP task A.....finished	 Hamming time:0.028915 sec 
+OpenMP task B.....finished	 Hamming time:0.012240 sec 
+OpenMP task C.....finished	 Hamming time:0.023992 sec 
+PThreads task A...finished	 Hamming time:0.032328 sec 
+PThreads task B...finished	 Hamming time:0.027015 sec 
+PThreads task C...finished	 Hamming time:0.027056 sec 
+
+Calculating Hamming distances for m:100 n:1000 l:10
+Serial............finished	 Hamming time:0.010607 sec | Sum Value:499796
+OpenMP task A.....finished	 Hamming time:0.010621 sec 
+OpenMP task B.....finished	 Hamming time:0.002009 sec 
+OpenMP task C.....finished	 Hamming time:0.001644 sec 
+PThreads task A...finished	 Hamming time:0.023045 sec 
+PThreads task B...finished	 Hamming time:0.003278 sec 
+PThreads task C...finished	 Hamming time:0.002750 sec 
+
+Calculating Hamming distances for m:100 n:1000 l:100
+Serial............finished	 Hamming time:0.092454 sec | Sum Value:4998862
+OpenMP task A.....finished	 Hamming time:0.024123 sec 
+OpenMP task B.....finished	 Hamming time:0.024374 sec 
+OpenMP task C.....finished	 Hamming time:0.024447 sec 
+PThreads task A...finished	 Hamming time:0.035728 sec 
+PThreads task B...finished	 Hamming time:0.019792 sec 
+PThreads task C...finished	 Hamming time:0.025474 sec 
+
+Calculating Hamming distances for m:100 n:1000 l:1000
+Serial............finished	 Hamming time:0.906056 sec | Sum Value:49988350
+OpenMP task A.....finished	 Hamming time:0.221340 sec 
+OpenMP task B.....finished	 Hamming time:0.199592 sec 
+OpenMP task C.....finished	 Hamming time:0.209134 sec 
+PThreads task A...finished	 Hamming time:0.192748 sec 
+PThreads task B...finished	 Hamming time:0.184114 sec 
+PThreads task C...finished	 Hamming time:0.233264 sec 
+
+Calculating Hamming distances for m:100 n:10000 l:10
+Serial............finished	 Hamming time:0.103898 sec | Sum Value:4999326
+OpenMP task A.....finished	 Hamming time:0.046969 sec 
+OpenMP task B.....finished	 Hamming time:0.020687 sec 
+OpenMP task C.....finished	 Hamming time:0.018906 sec 
+PThreads task A...finished	 Hamming time:0.084128 sec 
+PThreads task B...finished	 Hamming time:0.021995 sec 
+PThreads task C...finished	 Hamming time:0.025101 sec 
+
+Calculating Hamming distances for m:100 n:10000 l:100
+Serial............finished	 Hamming time:0.903428 sec | Sum Value:50001726
+OpenMP task A.....finished	 Hamming time:0.259884 sec 
+OpenMP task B.....finished	 Hamming time:0.222861 sec 
+OpenMP task C.....finished	 Hamming time:0.220854 sec 
+PThreads task A...finished	 Hamming time:0.246491 sec 
+PThreads task B...finished	 Hamming time:0.195454 sec 
+PThreads task C...finished	 Hamming time:0.250001 sec 
+
+Calculating Hamming distances for m:100 n:10000 l:1000
+Serial............finished	 Hamming time:9.203130 sec | Sum Value:499993294
+OpenMP task A.....finished	 Hamming time:2.220242 sec 
+OpenMP task B.....finished	 Hamming time:2.607926 sec 
+OpenMP task C.....finished	 Hamming time:2.420867 sec 
+PThreads task A...finished	 Hamming time:1.852644 sec 
+PThreads task B...finished	 Hamming time:1.834927 sec 
+PThreads task C...finished	 Hamming time:2.943248 sec 
+
+Calculating Hamming distances for m:1000 n:1 l:10
+Serial............finished	 Hamming time:0.000124 sec | Sum Value:5005
+OpenMP task A.....finished	 Hamming time:0.007840 sec 
+OpenMP task B.....finished	 Hamming time:0.004631 sec 
+OpenMP task C.....finished	 Hamming time:0.006096 sec 
+PThreads task A...finished	 Hamming time:0.000378 sec 
+PThreads task B...finished	 Hamming time:0.000192 sec 
+PThreads task C...finished	 Hamming time:0.000352 sec 
+
+Calculating Hamming distances for m:1000 n:1 l:100
+Serial............finished	 Hamming time:0.001068 sec | Sum Value:49972
+OpenMP task A.....finished	 Hamming time:0.001215 sec 
+OpenMP task B.....finished	 Hamming time:0.007935 sec 
+OpenMP task C.....finished	 Hamming time:0.017337 sec 
+PThreads task A...finished	 Hamming time:0.014715 sec 
+PThreads task B...finished	 Hamming time:0.000495 sec 
+PThreads task C...finished	 Hamming time:0.001385 sec 
+
+Calculating Hamming distances for m:1000 n:1 l:1000
+Serial............finished	 Hamming time:0.008713 sec | Sum Value:500383
+OpenMP task A.....finished	 Hamming time:0.006520 sec 
+OpenMP task B.....finished	 Hamming time:0.002027 sec 
+OpenMP task C.....finished	 Hamming time:0.027862 sec 
+PThreads task A...finished	 Hamming time:0.009744 sec 
+PThreads task B...finished	 Hamming time:0.003249 sec 
+PThreads task C...finished	 Hamming time:0.013611 sec 
+
+Calculating Hamming distances for m:1000 n:100 l:10
+Serial............finished	 Hamming time:0.010804 sec | Sum Value:499460
+OpenMP task A.....finished	 Hamming time:0.003887 sec 
+OpenMP task B.....finished	 Hamming time:0.001131 sec 
+OpenMP task C.....finished	 Hamming time:0.001486 sec 
+PThreads task A...finished	 Hamming time:0.017579 sec 
+PThreads task B...finished	 Hamming time:0.004137 sec 
+PThreads task C...finished	 Hamming time:0.001935 sec 
+
+Calculating Hamming distances for m:1000 n:100 l:100
+Serial............finished	 Hamming time:0.094430 sec | Sum Value:4998718
+OpenMP task A.....finished	 Hamming time:0.031347 sec 
+OpenMP task B.....finished	 Hamming time:0.010815 sec 
+OpenMP task C.....finished	 Hamming time:0.022861 sec 
+PThreads task A...finished	 Hamming time:0.042376 sec 
+PThreads task B...finished	 Hamming time:0.021142 sec 
+PThreads task C...finished	 Hamming time:0.022475 sec 
+
+Calculating Hamming distances for m:1000 n:100 l:1000
+Serial............finished	 Hamming time:0.894075 sec | Sum Value:50004852
+OpenMP task A.....finished	 Hamming time:0.233784 sec 
+OpenMP task B.....finished	 Hamming time:0.126302 sec 
+OpenMP task C.....finished	 Hamming time:0.248354 sec 
+PThreads task A...finished	 Hamming time:0.184177 sec 
+PThreads task B...finished	 Hamming time:0.190731 sec 
+PThreads task C...finished	 Hamming time:0.211189 sec 
+
+Calculating Hamming distances for m:1000 n:1000 l:10
+Serial............finished	 Hamming time:0.101325 sec | Sum Value:5001138
+OpenMP task A.....finished	 Hamming time:0.046421 sec 
+OpenMP task B.....finished	 Hamming time:0.011447 sec 
+OpenMP task C.....finished	 Hamming time:0.021081 sec 
+PThreads task A...finished	 Hamming time:0.059273 sec 
+PThreads task B...finished	 Hamming time:0.030608 sec 
+PThreads task C...finished	 Hamming time:0.026834 sec 
+
+Calculating Hamming distances for m:1000 n:1000 l:100
+Serial............finished	 Hamming time:0.920783 sec | Sum Value:49995252
+OpenMP task A.....finished	 Hamming time:0.239809 sec 
+OpenMP task B.....finished	 Hamming time:0.169173 sec 
+OpenMP task C.....finished	 Hamming time:0.202350 sec 
+PThreads task A...finished	 Hamming time:0.227969 sec 
+PThreads task B...finished	 Hamming time:0.185158 sec 
+PThreads task C...finished	 Hamming time:0.206430 sec 
+
+Calculating Hamming distances for m:1000 n:1000 l:1000
+Serial............finished	 Hamming time:8.958340 sec | Sum Value:499982562
+OpenMP task A.....finished	 Hamming time:2.104068 sec 
+OpenMP task B.....finished	 Hamming time:1.657622 sec 
+OpenMP task C.....finished	 Hamming time:1.969578 sec 
+PThreads task A...finished	 Hamming time:1.804787 sec 
+PThreads task B...finished	 Hamming time:1.816300 sec 
+PThreads task C...finished	 Hamming time:2.203022 sec 
+
+Calculating Hamming distances for m:1000 n:10000 l:10
+Serial............finished	 Hamming time:1.036264 sec | Sum Value:49990052
+OpenMP task A.....finished	 Hamming time:0.486460 sec 
+OpenMP task B.....finished	 Hamming time:0.208664 sec 
+OpenMP task C.....finished	 Hamming time:0.204509 sec 
+PThreads task A...finished	 Hamming time:0.508180 sec 
+PThreads task B...finished	 Hamming time:0.231411 sec 
+PThreads task C...finished	 Hamming time:0.245862 sec 
+
+Calculating Hamming distances for m:1000 n:10000 l:100
+Serial............finished	 Hamming time:9.172845 sec | Sum Value:500000936
+OpenMP task A.....finished	 Hamming time:2.469114 sec 
+OpenMP task B.....finished	 Hamming time:2.164989 sec 
+OpenMP task C.....finished	 Hamming time:2.034571 sec 
+PThreads task A...finished	 Hamming time:2.234405 sec 
+PThreads task B...finished	 Hamming time:1.857893 sec 
+PThreads task C...finished	 Hamming time:2.548144 sec 
+
+Calculating Hamming distances for m:1000 n:10000 l:1000
+Serial............finished	 Hamming time:90.214299 sec | Sum Value:4999960850
+OpenMP task A.....finished	 Hamming time:21.197727 sec 
+OpenMP task B.....finished	 Hamming time:24.856769 sec 
+OpenMP task C.....finished	 Hamming time:23.121386 sec 
+PThreads task A...finished	 Hamming time:17.840727 sec 
+PThreads task B...finished	 Hamming time:17.891597 sec 
+PThreads task C...finished	 Hamming time:28.935837 sec 
+
+Calculating Hamming distances for m:10000 n:1 l:10
+Serial............finished	 Hamming time:0.001064 sec | Sum Value:50090
+OpenMP task A.....finished	 Hamming time:0.006410 sec 
+OpenMP task B.....finished	 Hamming time:0.024447 sec 
+OpenMP task C.....finished	 Hamming time:0.016485 sec 
+PThreads task A...finished	 Hamming time:0.012733 sec 
+PThreads task B...finished	 Hamming time:0.000544 sec 
+PThreads task C...finished	 Hamming time:0.001596 sec 
+
+Calculating Hamming distances for m:10000 n:1 l:100
+Serial............finished	 Hamming time:0.008779 sec | Sum Value:499171
+OpenMP task A.....finished	 Hamming time:0.008592 sec 
+OpenMP task B.....finished	 Hamming time:0.002010 sec 
+OpenMP task C.....finished	 Hamming time:0.026387 sec 
+PThreads task A...finished	 Hamming time:0.007871 sec 
+PThreads task B...finished	 Hamming time:0.003353 sec 
+PThreads task C...finished	 Hamming time:0.012860 sec 
+
+Calculating Hamming distances for m:10000 n:1 l:1000
+Serial............finished	 Hamming time:0.091674 sec | Sum Value:5000979
+OpenMP task A.....finished	 Hamming time:0.024126 sec 
+OpenMP task B.....finished	 Hamming time:0.026430 sec 
+OpenMP task C.....finished	 Hamming time:0.247435 sec 
+PThreads task A...finished	 Hamming time:0.023542 sec 
+PThreads task B...finished	 Hamming time:0.026208 sec 
+PThreads task C...finished	 Hamming time:0.117383 sec 
+
+Calculating Hamming distances for m:10000 n:100 l:10
+Serial............finished	 Hamming time:0.100208 sec | Sum Value:5000448
+OpenMP task A.....finished	 Hamming time:0.041344 sec 
+OpenMP task B.....finished	 Hamming time:0.010538 sec 
+OpenMP task C.....finished	 Hamming time:0.012783 sec 
+PThreads task A...finished	 Hamming time:0.062093 sec 
+PThreads task B...finished	 Hamming time:0.024805 sec 
+PThreads task C...finished	 Hamming time:0.016335 sec 
+
+Calculating Hamming distances for m:10000 n:100 l:100
+Serial............finished	 Hamming time:0.915205 sec | Sum Value:49997320
+OpenMP task A.....finished	 Hamming time:0.253160 sec 
+OpenMP task B.....finished	 Hamming time:0.110108 sec 
+OpenMP task C.....finished	 Hamming time:0.215645 sec 
+PThreads task A...finished	 Hamming time:0.237588 sec 
+PThreads task B...finished	 Hamming time:0.200899 sec 
+PThreads task C...finished	 Hamming time:0.184836 sec 
+
+Calculating Hamming distances for m:10000 n:100 l:1000
+Serial............finished	 Hamming time:8.948640 sec | Sum Value:500006514
+OpenMP task A.....finished	 Hamming time:2.112808 sec 
+OpenMP task B.....finished	 Hamming time:1.155033 sec 
+OpenMP task C.....finished	 Hamming time:2.277200 sec 
+PThreads task A...finished	 Hamming time:1.779883 sec 
+PThreads task B...finished	 Hamming time:1.810811 sec 
+PThreads task C...finished	 Hamming time:2.019761 sec 
+
+Calculating Hamming distances for m:10000 n:1000 l:10
+Serial............finished	 Hamming time:0.998034 sec | Sum Value:50000374
+OpenMP task A.....finished	 Hamming time:0.459149 sec 
+OpenMP task B.....finished	 Hamming time:0.145997 sec 
+OpenMP task C.....finished	 Hamming time:0.166366 sec 
+PThreads task A...finished	 Hamming time:0.483399 sec 
+PThreads task B...finished	 Hamming time:0.250563 sec 
+PThreads task C...finished	 Hamming time:0.181950 sec 
+
+Calculating Hamming distances for m:10000 n:1000 l:100
+Serial............finished	 Hamming time:9.140707 sec | Sum Value:500018500
+OpenMP task A.....finished	 Hamming time:2.379496 sec 
+OpenMP task B.....finished	 Hamming time:1.429518 sec 
+OpenMP task C.....finished	 Hamming time:1.955125 sec 
+PThreads task A...finished	 Hamming time:2.152660 sec 
+PThreads task B...finished	 Hamming time:1.893486 sec 
+PThreads task C...finished	 Hamming time:1.978256 sec 
+
+Calculating Hamming distances for m:10000 n:1000 l:1000
+Serial............finished	 Hamming time:89.915146 sec | Sum Value:4999962662
+OpenMP task A.....finished	 Hamming time:20.885115 sec 
+OpenMP task B.....finished	 Hamming time:17.191082 sec 
+OpenMP task C.....finished	 Hamming time:19.778362 sec 
+PThreads task A...finished	 Hamming time:17.515610 sec 
+PThreads task B...finished	 Hamming time:17.628484 sec 
+PThreads task C...finished	 Hamming time:21.620794 sec 
+
+Calculating Hamming distances for m:10000 n:10000 l:10
+Serial............finished	 Hamming time:10.116034 sec | Sum Value:500028540
+OpenMP task A.....finished	 Hamming time:4.609138 sec 
+OpenMP task B.....finished	 Hamming time:2.020923 sec 
+OpenMP task C.....finished	 Hamming time:1.908216 sec 
+PThreads task A...finished	 Hamming time:4.704683 sec 
+PThreads task B...finished	 Hamming time:2.446112 sec 
+PThreads task C...finished	 Hamming time:2.136507 sec 
+
+Calculating Hamming distances for m:10000 n:10000 l:100
+Serial............finished	 Hamming time:90.594776 sec | Sum Value:4999911970
+OpenMP task A.....finished	 Hamming time:23.660275 sec 
+OpenMP task B.....finished	 Hamming time:20.432197 sec 
+OpenMP task C.....finished	 Hamming time:19.561191 sec 
+PThreads task A...finished	 Hamming time:21.233341 sec 
+PThreads task B...finished	 Hamming time:18.814605 sec 
+PThreads task C...finished	 Hamming time:23.588366 sec 
+
+Calculating Hamming distances for m:10000 n:10000 l:1000
+Serial............finished	 Hamming time:901.126840 sec | Sum Value:49999917936
+OpenMP task A.....finished	 Hamming time:210.443076 sec 
+OpenMP task B.....finished	 Hamming time:246.573946 sec 
+OpenMP task C.....finished	 Hamming time:225.399182 sec 
+PThreads task A...finished	 Hamming time:176.159558 sec 
+PThreads task B...finished	 Hamming time:175.806107 sec 
+PThreads task C...finished	 Hamming time:286.929533 sec 
