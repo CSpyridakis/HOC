@@ -11,6 +11,12 @@ static int aLength[ARRAY_A] = {1, 100, 1000, 10000};             // equals with 
 static int bLength[ARRAY_B] = {1, 100, 1000, 10000};             // equals with number n
 static int stringLength[STRINGS_L] = {10, 100, 1000};            // equals with number l
 typedef int bool;
+#define BEST 0
+/**
+ * @brief If you want change this value to desired NUMBER OF THREADS
+ *        If THREADS == BEST, max number of available Threads used
+ */
+#define THREADS BEST
 
 #define type int
 #define TASK_A 0

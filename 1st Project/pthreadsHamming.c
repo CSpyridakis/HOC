@@ -51,7 +51,8 @@ void *taskA(void *tid) {
 
 void *taskB(void *tid) {
 
-    int i, j, k, psum = 0;
+    int i, j, k;
+    unsigned long long psum = 0;
     int id = *((int *) tid);
 
     /// Parallel section
@@ -84,7 +85,8 @@ void *taskB(void *tid) {
 }
 
 void *taskC(void *tid) {
-    int i, j, k, psum = 0;
+    int i, j, k;
+    unsigned long long psum = 0;
     int id = *((int *) tid);
 
     for (i = 0; i < src_GLOBAL->Alen; i++) {
@@ -159,7 +161,12 @@ double pthreadsHamm_task(structs *src, unsigned long long serialHammingSum, type
     structcpy(src);
 
     //Thread needed variables
-    NUM_THREADS = get_nprocs();
+    if(THREADS==BEST){
+        NUM_THREADS = get_nprocs();
+    }
+    else{
+        NUM_THREADS= THREADS;
+    }
     pthread_t threads[NUM_THREADS];
     int tid[NUM_THREADS];
     int ptd;

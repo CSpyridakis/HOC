@@ -8,6 +8,10 @@ double openMpHamm_taskA(structs *src, unsigned long long serialHammingSum) {
     unsigned long long sum = 0;
     int **hammingValues = init2dArray(src->Alen, src->Blen);
 
+    if(THREADS!=BEST){
+        omp_set_num_threads(THREADS);
+    }
+
     printf("OpenMP task A.....");
     double begin = gettime();
     #pragma omp parallel
@@ -62,6 +66,10 @@ double openMpHamm_taskB(structs *src, unsigned long long serialHammingSum) {
     unsigned long long sum = 0;
     int **hammingValues = init2dArray(src->Alen, src->Blen);
 
+    if(THREADS!=BEST){
+        omp_set_num_threads(THREADS);
+    }
+
     printf("OpenMP task B.....");
     double begin = gettime();
     #pragma omp parallel
@@ -105,6 +113,10 @@ double openMpHamm_taskB(structs *src, unsigned long long serialHammingSum) {
 double openMpHamm_taskC(structs *src, unsigned long long serialHammingSum) {
     unsigned long long sum = 0;
     int **hammingValues = init2dArray(src->Alen, src->Blen);
+
+    if(THREADS!=BEST){
+        omp_set_num_threads(THREADS);
+    }
 
     printf("OpenMP task C.....");
     double begin = gettime();
