@@ -2,21 +2,36 @@
 #define PARALLEL_COSTUM_STRUCTS_H
 
 /**
- * @brief Project input variables
+ * @brief Project input variables, In order to check multiple inputs at once use this variables
+ *
+ *
+ * @param ARRAY_A equals with number of elements in aLength Array
+ * @param ARRAY_B equals with number of elements in bLength Array
+ * @param STRINGS_L quals with number of elements in stringLength Array
+ *
+ *
  */
 #define ARRAY_A 4
 #define ARRAY_B 4
 #define STRINGS_L 3
-static int aLength[ARRAY_A] = {1, 100, 1000, 10000};             // equals with number m
-static int bLength[ARRAY_B] = {1, 100, 1000, 10000};             // equals with number n
-static int stringLength[STRINGS_L] = {10, 100, 1000};            // equals with number l
+static int aLength[ARRAY_A] = {1, 100, 1000, 10000};             // equals with m
+static int bLength[ARRAY_B] = {1, 100, 1000, 10000};             // equals with n
+static int stringLength[STRINGS_L] = {10, 100, 1000};            // equals with l
 typedef int bool;
 #define BEST 0
+#define RANDOM 0
+
 /**
  * @brief If you want change this value to desired NUMBER OF THREADS
  *        If THREADS == BEST, max number of available Threads used
  */
 #define THREADS BEST
+
+/**
+ * @brief If you want to test time of execution for different number of threads change this variable
+ * from RANDOM to some value of your choice
+ */
+#define SEED RANDOM
 
 #define type int
 #define TASK_A 0

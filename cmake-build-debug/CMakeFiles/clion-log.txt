@@ -1,1 +1,1 @@
-CMakeLists.txt not found in /home/cspyridakis/Desktop/end/Introduction-in-Parallel-and-Distributed-Computer-Architecture
+CMakeLists.txt not found in /home/cspyridakis/Desktop/testing/Introduction-in-Parallel-and-Distributed-Computer-Architecture

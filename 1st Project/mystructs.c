@@ -40,7 +40,13 @@ void structsGenerate(structs *src, int alen, int blen, int strlen) {
     src->Strlen = strlen;
 
     // Initialize random
-    srand(time(NULL));
+    if(SEED==RANDOM){
+        srand(time(NULL));
+    }
+    else{
+        srand(SEED);
+    }
+
 
     /// Create two 2d RANDOM char arrays
     src->A = (char **) malloc(sizeof(char *) * src->Alen);
