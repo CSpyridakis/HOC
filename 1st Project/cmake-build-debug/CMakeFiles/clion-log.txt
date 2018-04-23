@@ -1,1 +1,0 @@
-CMakeLists.txt not found in /home/chspyman/Desktop/ParallelArchitecture/Introduction-in-Parallel-and-Distributed-Computer-Architecture/1st Project

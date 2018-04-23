@@ -52,8 +52,10 @@ Mkfile.old
 dkms.conf
 
 #My files
+.idea
+cmake-build-debug/
 1st Project/run
-1st Project/cmake-build-debug/*
+1st Project/cmake-build-debug/
 1st Project/.idea/
 
 2nd Project/.idea/
