@@ -28,8 +28,10 @@ int main(int argc, char **argv) {
 
     //Needed Variables to make things easy
     int N = atoi(argv[1]);
-    int alignb=16;
+    int alignb=16;                  //malloc alignment Bits
     int iters = 1000;
+    int _4fp=4;                     //4 floating pointer variables
+    int _sseL=N-N%4,tail=_sseL;     //Limits for SSE and Tail variables (leftovers)
 
     srand(1);
 
@@ -49,6 +51,9 @@ int main(int argc, char **argv) {
     assert(CVec != NULL);
     float *FVec = (float *) _mm_malloc(sizeof(float) * N,alignb);
     assert(FVec != NULL);
+    float * max=(float *) _mm_malloc(sizeof(float) * _4fp,alignb);
+    assert(max != NULL);
+
 
     /*
      * Init variables
@@ -81,49 +86,66 @@ int main(int argc, char **argv) {
     //Float number vectors needed for calculations
     __m128 _1 = _mm_set_ps1(1.0f), _2 = _mm_set_ps1(2.0f), _001 = _mm_set_ps1(0.01f);
 
-    // "Copy" arrays to vectors
-    __m128 * _mVec = (__m128 *)mVec;
-    __m128 * _nVec = (__m128 *)nVec;
-    __m128 * _LVec = (__m128 *)LVec;
-    __m128 * _RVec = (__m128 *)RVec;
-    __m128 * _CVec = (__m128 *)CVec;
-    __m128 * _FVec = (__m128 *)FVec;
 
-    //TODO : SSE
-    __m128 _num_0,_num_1,_num_2,_num,_den_0,_den_1,_den;
-    for (int j = 0; j < iters; j++) {
+    // SSE Vectors
+    __m128 _mVec, _nVec ,_LVec ,_RVec , _CVec ,_FVec;
+    __m128 _num_0,_num_1,_num_2,_num,_den_0,_den_1,_den, _tmp, _maxF=_mm_set_ps1(0.0f);
+    for (int j = 0; j < 1; j++) {
 
         double time0 = gettime();
-        for (int i = 0; i < N; i++) {
-            _num_0 = _mm_add_ps(_LVec[i],_RVec[i]);        //float num_0 = LVec[i] + RVec[i];
-            //_num_1 =        //float num_1 = mVec[i] * (mVec[i] - 1.0) / 2.0;
-            //_num_2 =        //float num_2 = nVec[i] * (nVec[i] - 1.0) / 2.0;
-            //_num   =        //float num = num_0 / (num_1 + num_2);
+        for (int i = 0; i < _sseL; i+=4) {
 
-                    //float den_0 = CVec[i] - LVec[i] - RVec[i];
-                    //float den_1 = mVec[i] * nVec[i];
-                    //float den = den_0 / den_1;
+            // Load 4 floats from i position to vector
+            _mVec=_mm_load_ps(mVec+i);
+            _nVec=_mm_load_ps(nVec+i);
+            _LVec=_mm_load_ps(LVec+i);
+            _RVec=_mm_load_ps(RVec+i);
+            _CVec=_mm_load_ps(CVec+i);
+            _FVec=_mm_load_ps(FVec+i);
 
-                    //FVec[i] = num / (den + 0.01);
+            //Intrinsics
+            _num_0   =   _mm_add_ps(_LVec,_RVec);                    //float num_0 = LVec[i] + RVec[i];
 
-                    //maxF = FVec[i] > maxF ? FVec[i] : maxF;
+            _tmp     =   _mm_sub_ps(_mVec,_1);
+            _num_1   =   _mm_div_ps(_mm_mul_ps(_mVec,_tmp),_2);      //float num_1 = mVec[i] * (mVec[i] - 1.0) / 2.0;
+            _tmp     =   _mm_sub_ps(_nVec,_1);
+            _num_2   =   _mm_div_ps(_mm_mul_ps(_nVec,_tmp),_2);      //float num_2 = nVec[i] * (nVec[i] - 1.0) / 2.0;
+            _tmp     =   _mm_add_ps(_num_1,_num_2);
+            _num     =   _mm_div_ps(_num_0,_tmp);                    //float num = num_0 / (num_1 + num_2);
+
+            _tmp     =   _mm_sub_ps(_CVec,_LVec);
+            _den_0   =   _mm_sub_ps(_tmp,_RVec);                     //float den_0 = CVec[i] - LVec[i] - RVec[i];
+            _den_1   =   _mm_mul_ps(_mVec,_nVec);                    //float den_1 = mVec[i] * nVec[i];
+            _den     =   _mm_div_ps(_den_0,_den_1);                  //float den = den_0 / den_1;
+
+            _tmp     =  _mm_add_ps(_den,_001);
+            _FVec    =  _mm_div_ps(_num,_tmp);                       //FVec[i] = num / (den + 0.01);
+
+            _maxF    =  _mm_max_ps(_FVec,_maxF);                     //maxF = FVec[i] > maxF ? FVec[i] : maxF;
+
         }
 
-        //TODO: tail data
-//        for (int i = 0; i < N; i++) {
-//            float num_0 = LVec[i] + RVec[i];
-//            float num_1 = mVec[i] * (mVec[i] - 1.0) / 2.0;
-//            float num_2 = nVec[i] * (nVec[i] - 1.0) / 2.0;
-//            float num = num_0 / (num_1 + num_2);
-//
-//            float den_0 = CVec[i] - LVec[i] - RVec[i];
-//            float den_1 = mVec[i] * nVec[i];
-//            float den = den_0 / den_1;
-//
-//            FVec[i] = num / (den + 0.01);
-//
-//            maxF = FVec[i] > maxF ? FVec[i] : maxF;
-//        }
+        //Max finder
+        _mm_store_ps(max,_maxF);
+        for(int i=0;i<_4fp;i++){
+            maxF = maxF > max[i] ? maxF : max[i];
+        }
+
+        //Tail data
+        for (int i = tail; i < N; i++) {
+            float num_0 = LVec[i] + RVec[i];
+            float num_1 = mVec[i] * (mVec[i] - 1.0) / 2.0;
+            float num_2 = nVec[i] * (nVec[i] - 1.0) / 2.0;
+            float num = num_0 / (num_1 + num_2);
+
+            float den_0 = CVec[i] - LVec[i] - RVec[i];
+            float den_1 = mVec[i] * nVec[i];
+            float den = den_0 / den_1;
+
+            FVec[i] = num / (den + 0.01);
+
+            maxF = FVec[i] > maxF ? FVec[i] : maxF;
+        }
 
         double time1 = gettime();
         timeTotal += time1 - time0;
@@ -140,4 +162,5 @@ int main(int argc, char **argv) {
     _mm_free(RVec);
     _mm_free(CVec);
     _mm_free(FVec);
+    _mm_free(max);
 }
