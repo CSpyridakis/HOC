@@ -19,7 +19,11 @@ float randpval() {
 }
 
 int main(int argc, char **argv) {
-    
+    if (argc !=2 ){
+        printf("\nERROR... Input example:\n$ ./serialR 1000\n");
+        return -1;
+    }
+
     int N = atoi(argv[1]);
 
     int iters = 1000;
@@ -91,8 +95,8 @@ int main(int argc, char **argv) {
         timeTotal += time1 - time0;
     }
 
+    printf("\nSerial\n");
     printf("Time %f Max %f\n", timeTotal / iters, maxF);
-
     free(mVec);
     free(nVec);
     free(LVec);
