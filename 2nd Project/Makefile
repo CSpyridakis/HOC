@@ -1,13 +1,22 @@
-all: serial sse #mpi 
+EXECS=serial sse mpi
+
+GCC    = gcc
+CFLAGS = -Wall -std=c99
+
+
+MPICC  = mpicc
+MFLAGS = -msse4.2
+
+all: ${EXECS}
 
 serial:
-	gcc -o serialR serial_DNA.c -std=c99
+	${GCC} ${CFLAGS} -o serialR serial_DNA.c
 
 sse:
-	gcc -msse4.2 -o sseR sse_DNA.c -std=c99
+	${GCC} ${CFLAGS} ${MFLAGS} -o sseR sse_DNA.c
 
 mpi:
-	mpicc -msse4.2 -o mpiR sse-mpi_DNA.c -std=c99
+	${MPICC} ${CFLAGS} ${MFLAGS} -o mpiR sse-mpi_DNA.c
 
 clean:
 	rm -rf *.o
