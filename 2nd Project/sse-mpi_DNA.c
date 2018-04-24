@@ -33,9 +33,15 @@ int main(int argc, char **argv) {
     int N = atoi(argv[1]);
 
     //Process limits
-    int Np     =  N / wSize;
+    int Np     =  N / wSize - (N / wSize) % 4;
     int pStart =  Np * wRank;
     int pEND   =  Np * (wRank+1)-1;
+
+    //Remaining data
+    if(wSize==wRank+1){
+        Np=Np+(N-pEND-1);
+        pEND=N-1;
+    }
 
     //Needed Variables to make things easy
     int alignb =  16;                                   //Malloc alignment Bits
@@ -96,17 +102,14 @@ int main(int argc, char **argv) {
     //Float number vectors needed for calculations
     __m128 _1 = _mm_set_ps1(1.0f), _2 = _mm_set_ps1(2.0f), _001 = _mm_set_ps1(0.01f);
 
-    //TODO : DELETE THEM
-    printf("\nPer Pro :%d || Task id %d ||| ALL %d -> %d  \t|||\tSSE %d -> %d \t|||\t Leftovers %d -> %d\n",Np,wRank,pStart,pEND,pStart,_PsseL,Ptail,pEND);
-//    return -1;
-/*
+
     // SSE Vectors
     __m128 _mVec, _nVec, _LVec, _RVec, _CVec, _FVec;
     __m128 _num_0, _num_1, _num_2, _num, _den_0, _den_1, _den, _tmp, _maxF = _mm_set_ps1(0.0f);
+    double time0 = gettime();
     for (int j = 0; j < iters; j++) {
         //SSE
-        double time0 = gettime();
-        for (int i = pStart; i < _PsseL; i += 4) {
+        for (int i = pStart; i <= _PsseL; i += 4) {
 
             // Load 4 floats from i position to vector
             _mVec = _mm_load_ps(mVec + i);
@@ -119,22 +122,22 @@ int main(int argc, char **argv) {
             //Intrinsics
             _num_0 = _mm_add_ps(_LVec, _RVec);                    //float num_0 = LVec[i] + RVec[i];
 
-            _tmp = _mm_sub_ps(_mVec, _1);
+            _tmp   = _mm_sub_ps(_mVec, _1);
             _num_1 = _mm_div_ps(_mm_mul_ps(_mVec, _tmp), _2);     //float num_1 = mVec[i] * (mVec[i] - 1.0) / 2.0;
-            _tmp = _mm_sub_ps(_nVec, _1);
+            _tmp   = _mm_sub_ps(_nVec, _1);
             _num_2 = _mm_div_ps(_mm_mul_ps(_nVec, _tmp), _2);     //float num_2 = nVec[i] * (nVec[i] - 1.0) / 2.0;
-            _tmp = _mm_add_ps(_num_1, _num_2);
-            _num = _mm_div_ps(_num_0, _tmp);                      //float num = num_0 / (num_1 + num_2);
+            _tmp   = _mm_add_ps(_num_1, _num_2);
+            _num   = _mm_div_ps(_num_0, _tmp);                    //float num = num_0 / (num_1 + num_2);
 
-            _tmp = _mm_sub_ps(_CVec, _LVec);
+            _tmp   = _mm_sub_ps(_CVec, _LVec);
             _den_0 = _mm_sub_ps(_tmp, _RVec);                     //float den_0 = CVec[i] - LVec[i] - RVec[i];
             _den_1 = _mm_mul_ps(_mVec, _nVec);                    //float den_1 = mVec[i] * nVec[i];
-            _den = _mm_div_ps(_den_0, _den_1);                    //float den = den_0 / den_1;
+            _den   = _mm_div_ps(_den_0, _den_1);                  //float den = den_0 / den_1;
 
-            _tmp = _mm_add_ps(_den, _001);
-            _FVec = _mm_div_ps(_num, _tmp);                       //FVec[i] = num / (den + 0.01);
+            _tmp   = _mm_add_ps(_den, _001);
+            _FVec  = _mm_div_ps(_num, _tmp);                      //FVec[i] = num / (den + 0.01);
 
-            _maxF = _mm_max_ps(_FVec, _maxF);                     //maxF = FVec[i] > maxF ? FVec[i] : maxF;
+            _maxF  = _mm_max_ps(_FVec, _maxF);                     //maxF = FVec[i] > maxF ? FVec[i] : maxF;
 
         }
 
@@ -146,7 +149,7 @@ int main(int argc, char **argv) {
         maxF = maxF > max[3] ? maxF : max[3];
 
         //Remaining elements
-        for (int i = Ptail; i < pEND; i++) {
+        for (int i = Ptail; i <= pEND; i++) {
             float num_0 = LVec[i] + RVec[i];
             float num_1 = mVec[i] * (mVec[i] - 1.0) / 2.0;
             float num_2 = nVec[i] * (nVec[i] - 1.0) / 2.0;
@@ -160,22 +163,32 @@ int main(int argc, char **argv) {
 
             maxF = FVec[i] > maxF ? FVec[i] : maxF;
         }
-        double time1 = gettime();
-        timeTotal += time1 - time0;
     }
-*/
-    //TODO: Send max and time from sub-processes to father
-//    printf("\nTask id %d, max:%f\n",wRank,maxF);
+    MPI_Barrier(MPI_COMM_WORLD);
+    double time1 = gettime();
+    timeTotal += time1 - time0;
+
+    //For Max finder
+    float *Pmaxs;
+    if (wRank == FATHER) {
+        Pmaxs = malloc(sizeof(float) * wSize);
+    }
+    MPI_Gather(&maxF, 1, MPI_FLOAT, Pmaxs, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
     /*
      * De-alloc and prints
      */
     if(wRank==FATHER){
-        //       printf("\nMPI\n");
-        //       printf("Number of tasks %d\n",wSize);
-        //       printf("Time %f Max %f\n", timeTotal / iters, maxF);
-    }
+        //Max finder
+        maxF=0.0f;
+        for (int i = 0; i < wSize; i++) {
+            maxF = Pmaxs[i] > maxF ? Pmaxs[i] : maxF;
+        }
 
+        printf("\nMPI\n");
+        printf("Number of tasks %d\n",wSize);
+        printf("Time %f Max %f\n", timeTotal / iters, maxF);
+    }
     MPI_Finalize();     //DESTROY MPI
     _mm_free(mVec);
     _mm_free(nVec);
