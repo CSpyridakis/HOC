@@ -95,7 +95,7 @@ int main(int argc, char **argv) {
         timeTotal += time1 - time0;
     }
 
-    printf("\nSerial\n");
+    printf("Serial\n");
     printf("Time %f Max %f\n", timeTotal / iters, maxF);
     free(mVec);
     free(nVec);
