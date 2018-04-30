@@ -14,9 +14,11 @@ serial:
 
 sse:
 	${GCC} ${CFLAGS} ${MFLAGS} -o sseR sse_DNA.c
+	${GCC} ${CFLAGS} ${MFLAGS} -o sseRP sse_DNA_PTR.c
 
 mpi:
 	${MPICC} ${CFLAGS} ${MFLAGS} -o mpiR sse-mpi_DNA.c
+	#${MPICC} ${CFLAGS} ${MFLAGS} -o mpiRP sse-mpi_DNA_PTR.c
 
 clean:
 	rm -rf *.o

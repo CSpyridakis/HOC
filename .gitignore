@@ -61,4 +61,5 @@ cmake-build-debug/
 2nd Project/.idea/
 2nd Project/CMakeLists.txt
 2nd Project/cmake-build-debug/
-
+2nd Project/mpiRP
+2nd Project/sseRP

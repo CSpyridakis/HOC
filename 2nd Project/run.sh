@@ -18,6 +18,7 @@ if [ $# -eq 0 ] ; then
 	echo ; echo "${green}********** N=100 **********${reset}"
 	./serialR 100
 	./sseR 100
+	./sseRP 100
 	mpiexec -n 2 ./mpiR 100
 	mpiexec -n 4 ./mpiR 100
 	mpiexec -n 8 ./mpiR 100
@@ -26,6 +27,7 @@ if [ $# -eq 0 ] ; then
 	echo ; echo "${green}********** N=1000 **********${reset}"
 	./serialR 1000
 	./sseR 1000
+	./sseRP 1000
 	mpiexec -n 2 ./mpiR 1000
 	mpiexec -n 4 ./mpiR 1000
 	mpiexec -n 8 ./mpiR 1000
@@ -34,6 +36,7 @@ if [ $# -eq 0 ] ; then
 	echo ; echo "${green}********** N=10000 **********${reset}"
 	./serialR 10000
 	./sseR 10000
+	./sseRP 10000
 	mpiexec -n 2 ./mpiR 10000
 	mpiexec -n 4 ./mpiR 10000
 	mpiexec -n 8 ./mpiR 10000
@@ -42,6 +45,7 @@ if [ $# -eq 0 ] ; then
 	echo ; echo "${green}********** N=100000 **********${reset}"
 	./serialR 100000
 	./sseR 100000
+	./sseRP 100000
 	mpiexec -n 2 ./mpiR 100000
 	mpiexec -n 4 ./mpiR 100000
 	mpiexec -n 8 ./mpiR 100000
@@ -62,7 +66,9 @@ make
 
 ./serialR $1
 ./sseR $1
+./sseRP $1
 mpiexec -n $2 ./mpiR $1
+#mpiexec -n $2 ./mpiRP $1
 
 echo ; make clean
 
