@@ -1,4 +1,4 @@
-# Improve execution performance Of Hamming distance Calculation using PThreads and OpenMP.
+# Improve execution time Of Hamming distance Calculation using PThreads and OpenMP.
 
 
 * In order to compile and execute code run in LINUX-based system
