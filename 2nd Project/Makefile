@@ -1,24 +1,27 @@
-EXECS=serial sse mpi
+TARGETS=serial sse mpi
+EXECS=serialR sseR sseRP mpiR
 
 GCC    = gcc
 CFLAGS = -Wall -std=c99
-
-
 MPICC  = mpicc
 MFLAGS = -msse4.2
 
-all: ${EXECS}
+SERIAL_SOURCE=serial_DNA.c
+SSE_SOURSE=sse_DNA.c
+SSE_PTR_SOURCE=sse_DNA_PTR.c
+MPI_SOURCE=sse-mpi_DNA.c
+
+all: $(TARGETS)
 
 serial:
-	${GCC} ${CFLAGS} -o serialR serial_DNA.c
+	$(GCC) $(CFLAGS) -o serialR $(SERIAL_SOURCE)
 
 sse:
-	${GCC} ${CFLAGS} ${MFLAGS} -o sseR sse_DNA.c
-	${GCC} ${CFLAGS} ${MFLAGS} -o sseRP sse_DNA_PTR.c
+	$(GCC) $(CFLAGS) $(MFLAGS) -o sseR $(SSE_SOURSE)
+	$(GCC) $(CFLAGS) $(MFLAGS) -o sseRP $(SSE_PTR_SOURCE)
 
 mpi:
-	${MPICC} ${CFLAGS} ${MFLAGS} -o mpiR sse-mpi_DNA.c
+	$(MPICC) $(CFLAGS) $(MFLAGS) -o mpiR $(MPI_SOURCE)
 
 clean:
-	rm -rf *.o
-	rm -rf serialR sseR sseRP mpiR
+	$(RM) $(EXECS)
