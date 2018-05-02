@@ -6,6 +6,10 @@
 #include <xmmintrin.h>
 #include <mpi.h>
 
+#define ANSI_RED     "\x1b[31m"
+#define ANSI_WHITE   "\x1b[37m"
+#define ANSI_RESET   "\x1b[0m"
+
 const int FATHER =0;
 
 double gettime(void) {
@@ -13,7 +17,6 @@ double gettime(void) {
     gettimeofday(&ttime, NULL);
     return ttime.tv_sec + ttime.tv_usec * 0.000001;
 }
-
 
 float randpval() {
     int vr = rand();
@@ -24,20 +27,25 @@ float randpval() {
 }
 
 int main(int argc, char **argv) {
+    
+    if (argc != 2) {
+        printf("\n"ANSI_RED"(ERROR)"ANSI_RESET" Wrong number of arguments! Input example:\n$ ./mpiR 1000\n");
+        return -1;
+    }
 
     MPI_Init(NULL, NULL);                              //Init MPI
     int wSize,wRank;
     MPI_Comm_size(MPI_COMM_WORLD, &wSize);             //GET NUMBER OF AVAILABLE PROCESSORS
-    MPI_Comm_rank(MPI_COMM_WORLD, &wRank);             //GET PROCESSOR ID
+    MPI_Comm_rank(MPI_COMM_WORLD, &wRank);             //GET PROCESS ID
 
     int N = atoi(argv[1]);
 
     //Process limits
-    int Np     =  N / wSize - (N / wSize) % 4;
+    int Np     =  N / wSize - (N / wSize) % 4;         // Number of elements (N) for each process
     int pStart =  Np * wRank;
     int pEND   =  Np * (wRank+1)-1;
 
-    //Remaining data
+    //Remaining data of all Processes
     if(wSize==wRank+1){
         Np=Np+(N-pEND-1);
         pEND=N-1;
@@ -47,7 +55,7 @@ int main(int argc, char **argv) {
     int alignb =  16;                                   //Malloc alignment Bits
     int iters  =  1000;
     int _numV  =  4;                                    //Four floating pointer variables inside packet __m128
-    int _PsseL =  pEND - Np % 4, Ptail = _PsseL+1;      //Limits for SSE and Tail variables (leftovers)
+    int _PsseL =  pEND - Np % 4, Ptail = _PsseL+1;      //Limits for SSE and Tail variables (leftovers) for each Process
 
     srand(1);
 
@@ -137,7 +145,7 @@ int main(int argc, char **argv) {
             _tmp   = _mm_add_ps(_den, _001);
             _FVec  = _mm_div_ps(_num, _tmp);                      //FVec[i] = num / (den + 0.01);
 
-            _maxF  = _mm_max_ps(_FVec, _maxF);                     //maxF = FVec[i] > maxF ? FVec[i] : maxF;
+            _maxF  = _mm_max_ps(_FVec, _maxF);                    //maxF = FVec[i] > maxF ? FVec[i] : maxF;
 
         }
 
@@ -169,12 +177,13 @@ int main(int argc, char **argv) {
     timeTotal += time1 - time0;
 
     //For Max finder
-    float *Pmaxs;
+    float *Pmaxs=NULL;
     if (wRank == FATHER) {
         Pmaxs = malloc(sizeof(float) * wSize);
     }
+    //Sent max of each process to 
     MPI_Gather(&maxF, 1, MPI_FLOAT, Pmaxs, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
-
+    
     /*
      * De-alloc and prints
      */
@@ -184,8 +193,9 @@ int main(int argc, char **argv) {
         for (int i = 0; i < wSize; i++) {
             maxF = Pmaxs[i] > maxF ? Pmaxs[i] : maxF;
         }
+        free(Pmaxs);
 
-        printf("\nMPI\n");
+        printf("\n"ANSI_WHITE"MPI"ANSI_RESET"\n");
         printf("Number of tasks %d\n",wSize);
         printf("Time %f Max %f\n", timeTotal / iters, maxF);
     }

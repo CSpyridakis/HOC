@@ -4,6 +4,10 @@
 #include <sys/time.h>
 #include <assert.h>
 
+#define ANSI_RED     "\x1b[31m"
+#define ANSI_WHITE   "\x1b[37m"
+#define ANSI_RESET   "\x1b[0m"
+
 double gettime(void) {
     struct timeval ttime;
     gettimeofday(&ttime, NULL);
@@ -20,7 +24,7 @@ float randpval() {
 
 int main(int argc, char **argv) {
     if (argc !=2 ){
-        printf("\nERROR... Input example:\n$ ./serialR 1000\n");
+        printf("\n"ANSI_RED"(ERROR)"ANSI_RESET" Wrong number of arguments! Input example:\n$ ./serialR 1000\n");
         return -1;
     }
 
@@ -95,7 +99,7 @@ int main(int argc, char **argv) {
         timeTotal += time1 - time0;
     }
 
-    printf("Serial\n");
+    printf(ANSI_WHITE"Serial"ANSI_RESET"\n");
     printf("Time %f Max %f\n", timeTotal / iters, maxF);
     free(mVec);
     free(nVec);

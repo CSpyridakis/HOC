@@ -68,7 +68,6 @@ make
 ./sseR $1
 ./sseRP $1
 mpiexec -n $2 ./mpiR $1
-#mpiexec -n $2 ./mpiRP $1
 
 echo ; make clean
 

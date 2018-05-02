@@ -5,12 +5,15 @@
 #include <assert.h>
 #include <xmmintrin.h>
 
+#define ANSI_RED     "\x1b[31m"
+#define ANSI_WHITE   "\x1b[37m"
+#define ANSI_RESET   "\x1b[0m"
+
 double gettime(void) {
     struct timeval ttime;
     gettimeofday(&ttime, NULL);
     return ttime.tv_sec + ttime.tv_usec * 0.000001;
 }
-
 
 float randpval() {
     int vr = rand();
@@ -22,7 +25,7 @@ float randpval() {
 
 int main(int argc, char **argv) {
     if (argc != 2) {
-        printf("\nERROR... Input example:\n$ ./sseR 1000\n");
+        printf("\n"ANSI_RED"(ERROR)"ANSI_RESET" Wrong number of arguments! Input example:\n$ ./sseRP 1000\n");
         return -1;
     }
 
@@ -54,7 +57,6 @@ int main(int argc, char **argv) {
     float *max = (float *) _mm_malloc(sizeof(float) * _numV, alignb);
     assert(max != NULL);
 
-
     /*
      * Init variables
      */
@@ -85,7 +87,6 @@ int main(int argc, char **argv) {
     double timeTotal = 0.0f;
     //Float number vectors needed for calculations
     __m128 _1 = _mm_set_ps1(1.0f), _2 = _mm_set_ps1(2.0f), _001 = _mm_set_ps1(0.01f);
-
 
 
     // SSE Vectors
@@ -153,7 +154,7 @@ int main(int argc, char **argv) {
     /*
      * De-alloc and prints
      */
-    printf("\nSSE (Pointer Implementation)\n");
+    printf("\n"ANSI_WHITE"SSE (Pointer Implementation)"ANSI_RESET"\n");
     printf("Time %f Max %f\n", timeTotal / iters, maxF);
     _mm_free(mVec);
     _mm_free(nVec);
