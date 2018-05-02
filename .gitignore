@@ -54,14 +54,14 @@ dkms.conf
 #My files
 .idea
 cmake-build-debug/
-1st Project/run
-1st Project/cmake-build-debug/
-1st Project/.idea/
+Hamming Distance/run
+Hamming Distance/cmake-build-debug/
+Hamming Distance/.idea/
 
-2nd Project/.idea/
-2nd Project/CMakeLists.txt
-2nd Project/cmake-build-debug/
-2nd Project/mpiR
-2nd Project/sseRP
-2nd Project/sseR
-2nd Project/serialR
+Omega Statistic/.idea/
+Omega Statistic/CMakeLists.txt
+Omega Statistic/cmake-build-debug/
+Omega Statistic/mpiR
+Omega Statistic/sseRP
+Omega Statistic/sseR
+Omega Statistic/serialR
