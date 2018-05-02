@@ -13,6 +13,9 @@ In order to compile and execute code run in LINUX-based system
 0. $ chmod +x run.sh (If needed)
 1. $ sh run.sh
 
+In order to clean make files run
+
+* make clean
 
 
 # Dependencies:
@@ -20,6 +23,4 @@ In order to compile and execute code run in LINUX-based system
 1. Mpich
 
 
-# In order to clean make files run
 
-1) make clean
