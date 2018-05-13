@@ -3,8 +3,9 @@
 
 * In order to compile and execute code run in LINUX-based system
 
-	1. make 
-	2. ./run
+	1) mkdir build
+	2) make 
+	3) ./run
 
 * In order to clean make files run.
 
