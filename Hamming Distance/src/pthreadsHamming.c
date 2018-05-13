@@ -1,4 +1,4 @@
-#include "pthreadsHamming.h"
+#include "../include/pthreadsHamming.h"
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>

@@ -1,4 +1,4 @@
-#include "mystructs.h"
+#include "../include/mystructs.h"
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>

@@ -11,8 +11,8 @@ if ! which mpiexec >/dev/null ; then
 fi
 
 if [ $# -eq 0 ] ; then
-	echo "${yellow}Building project...${reset}"
-	make
+	echo "${yellow}Building project...${reset}" ; make
+	cd ./bin/
 
 	# Run for N=100 AND P=2,4,8
 	echo ; echo "${green}********** N=100 **********${reset}"
@@ -50,7 +50,9 @@ if [ $# -eq 0 ] ; then
 	mpiexec -n 4 ./mpiR 100000
 	mpiexec -n 8 ./mpiR 100000
 
-	echo ; echo "${yellow}Cleaning project...${reset}"; make clean
+	cd ..
+	echo ;
+	#echo "${yellow}Cleaning project...${reset}"; make clean
 	exit 0
 fi
 
@@ -62,12 +64,13 @@ if [ $# != 2 ] ; then
     exit 2
 fi
 
-make
-
+echo "${yellow}Building project...${reset}" ; make ; echo
+cd ./bin/
 ./serialR $1
 ./sseR $1
 ./sseRP $1
 mpiexec -n $2 ./mpiR $1
-
-echo ; make clean
+cd ..
+echo ; 
+#echo "${yellow}Cleaning project...${reset}"; make clean
 

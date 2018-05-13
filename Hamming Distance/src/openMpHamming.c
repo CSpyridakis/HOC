@@ -1,4 +1,4 @@
-#include "openMpHamming.h"
+#include "../include/openMpHamming.h"
 #include <stdio.h>
 #include <omp.h>
 

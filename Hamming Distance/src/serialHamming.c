@@ -1,6 +1,6 @@
-#include "mystructs.h"
+#include "../include/mystructs.h"
+#include "../include/serialHamming.h"
 #include <stdio.h>
-#include "serialHamming.h"
 
 double serialHamm(structs *src, unsigned long long *serialSum) {
     /// Init Serial Sum

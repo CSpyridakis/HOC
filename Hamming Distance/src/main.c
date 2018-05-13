@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "mystructs.h"
-#include "serialHamming.h"
-#include "openMpHamming.h"
-#include "pthreadsHamming.h"
+#include "../include/mystructs.h"
+#include "../include/serialHamming.h"
+#include "../include/openMpHamming.h"
+#include "../include/pthreadsHamming.h"
 
 int main(int argc, char ** argv) {
 
