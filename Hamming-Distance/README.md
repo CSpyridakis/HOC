@@ -1,12 +1,20 @@
-# Improve execution time Of Hamming distance Calculation using PThreads and OpenMP.
+# Hamming Distance
+Improve execution time of Hamming distance calculation, using PThreads and OpenMP.
 
+## Documentation
+If you want more information about the implementation of this project you could read (or just try to read, unfortunately at this point is only in greek language) this [report file](./doc/report.pdf)
 
-* In order to compile and execute code run in LINUX-based system
+## Usage
 
-	1) mkdir build
-	2) make 
-	3) ./run
+### Compile and execute code in LINUX-based system
 
-* In order to clean make files run.
+```
+mkdir build
+make 
+./run
+```
 
-	1. make clean
+### Clean generated files in LINUX-based system
+```
+make clean
+```
