@@ -27,12 +27,13 @@ mpi:
 	$(MPICC) $(CFLAGS) $(MFLAGS) -o mpiR $(MPI_SOURCE)
 
 move:
+	mkdir -p $(PATH_TO_BIN)
 	mv serialR $(PATH_TO_BIN)
 	mv sseR $(PATH_TO_BIN)
 	mv sseRP $(PATH_TO_BIN)
 	mv mpiR $(PATH_TO_BIN)
 
 clean:
-	$(RM) $(EXECS)
+	$(RM) -r $(PATH_TO_BIN)
 
 	

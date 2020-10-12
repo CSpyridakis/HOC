@@ -59,18 +59,19 @@ fi
 if [ $# != 2 ] ; then
     echo "${red}Wrong number of arguments${reset}"
     echo "1) If you want to run all cases execute run.sh script without arguments"
-    echo "2) Or execute run.sh {Number of DNA elements} {Processes}"
+    echo "2) Or execute run.sh {N=Number of DNA elements} {P=Number of Processes}"
     echo "E.g. ${green} $ ${reset} sh run.sh 100 2"
     exit 2
 fi
 
 echo "${yellow}Building project...${reset}" ; make ; echo
+echo ; echo "${green}********** N=${1} **********${reset}" 
 cd ./bin/
 ./serialR $1
 ./sseR $1
 ./sseRP $1
 mpiexec -n $2 ./mpiR $1
 cd ..
-echo ; 
+echo ;
 #echo "${yellow}Cleaning project...${reset}"; make clean
 

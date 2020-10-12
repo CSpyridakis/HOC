@@ -12,8 +12,9 @@ all:
 	$(GCC) $(OMP_FLAGS) -c $(PATH_TO_SRC)openMpHamming.c
 	$(GCC) $(PTHREADS_FLAGS)$(PTHREADS_FLAGS) -c $(PATH_TO_SRC)pthreadsHamming.c
 	$(GCC) $(OMP_FLAGS) $(PTHREADS_FLAGS) main.o mystructs.o serialHamming.o openMpHamming.o pthreadsHamming.o -o run
+	mkdir -p $(PATH_TO_BUILD)
 	mv *.o $(PATH_TO_BUILD)
 
 clean:
-	$(RM) $(PATH_TO_BUILD)*.o
+	$(RM) -r $(PATH_TO_BUILD)
 	$(RM) run
